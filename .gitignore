@@ -1,0 +1,14 @@
+# Large files not tracked in git
+Viper Memes/
+Website v3.html
+Website v3.zip
+Branding Assets/Essential Geometry Grid Backgrounds.psd
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor
+.vscode/settings.json
+*.swp
