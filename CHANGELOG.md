@@ -14,6 +14,67 @@ Format:
 
 ---
 
+## [2026-05-06] — v3 release: merged madmusicmaker branch into master
+
+**Merged by:** MrJustJinx  
+**Branch:** `madmusicmaker` → `master`  
+**New file:** `Website v3.html` (madmusicmaker's changes promoted from `Website v2.html`)  
+**Previous version preserved as:** `Website v2.html` (original MrJustJinx build, untouched on master)
+
+### Summary of all changes in this release (authored by madmusicmaker / Jaron Deming)
+
+#### Nav bar — complete rework
+- Nav pill enlarged: `height: 56px → 88px`, `top: 10px → 24px`, `left/right: 12px → 28px`
+- Nav background: removed dot-grid overlay, now plain solid black `#000`
+- Logo image swapped: `coin-rotate.gif` → `Viper_Head transparant.png` (new asset)
+- Logo font size: `1.8rem → 2.4rem`, letter-spacing tightened to `0.5px`
+- Nav link font: `0.88rem → 1.45rem`, weight `400 → 700`, color always full white (no faded inactive state)
+- Active page indicator: gold underline bar (`::after`) anchored flush to pill bottom
+- BUY $VIPER button: permanent `1px solid #fff` border; hover now uses inset bottom-bar (`box-shadow: inset 0 -2px 0 0 #fff`) + 2px padding shift instead of lift/glow
+- Hamburger: rebuilt as green `#8ded41` circle (52×52px) matching BUY $VIPER visual language; bars `#000`; same inset hover treatment
+- Mobile menu repositioned: `top: 76px → 124px` to clear taller nav
+
+#### Buttons — unified hover pattern (all buttons site-wide)
+- All buttons (`.btn-red`, `.btn-green`, `.btn-ghost`, `.btn-gold`, `#dl-all-btn`, `.dl-btn`) given `1px solid #fff` border and the same inset bottom-bar + padding-shift hover treatment as BUY $VIPER
+- Removed all glow/lift/color-change hovers — replaced with consistent press-down feel
+- `align-self: flex-start` added to all buttons to prevent stretching in flex-column containers
+
+#### FANGS OF CARDANO cards — full redesign
+- Cards now use solid accent color fill as background (`var(--fc-color)`) with black text — no longer dark glass
+- Square corners (no `border-radius`)
+- Layout: `display: grid; grid-template-columns: 1fr auto` — title left, circular icon right
+- Icon in circular badge: 57px, `rgba(255,255,255,0.3)` fill, `1px solid #000` ring
+- Cardano card icon swapped to `Images/cardano-starburst-black.svg` (new asset); SVG uses `object-fit: contain` inside circle
+- Title font size: `1.25rem → 1.875rem`, uppercase
+- `fc-red` color changed from site red `#d63c2a` to magenta `#de5af2`
+- Hover: colored drop-shadow via `--fc-shadow` variable per card, white border
+
+#### Color token update
+- `--gold` updated: `#f0a830 → #ffa621` — cascades through all gold usages site-wide
+
+#### Page top-padding — nav clearance
+- All hero/landing sections bumped `5rem → 8rem` top padding to clear taller nav bottom edge (~113px)
+- `.hero-left` kept at `4rem` (content was too low in viewport at 8rem)
+
+#### Section pills / tags
+- `.tag` gets `align-self: flex-start` to stop stretching in flex-column parents
+- Letter-spacing padding fix: `padding: 5px 14px → 5px 10px 5px 14px` so text centers inside pill
+- "POWERED BY CARDANO" eyebrow changed from plain `<div>` to `<span class="tag tag-green">`
+
+#### HOW IT WORKS step cards
+- Square corners: `border-radius: 12px → 0`
+- Hover border: `rgba(0,0,0,0.07) → solid #000`
+
+#### Products & Services cards
+- `.pc` and `.pc-body` use flex-column with `flex: 1` so buttons lock to card bottoms regardless of description length
+
+#### Responsive breakpoints
+- Hamburger breakpoint moved: `960px → 1050px`
+- New shrink tier at `1300px`: menu items and logo scale down before hiding
+- Mobile section top-padding bumped `120px → 160px` across all affected sections
+
+---
+
 ## [2026-05-05] — Products & Services cards: buttons locked to bottom
 
 ### Changed
