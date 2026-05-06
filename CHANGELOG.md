@@ -14,6 +14,22 @@ Format:
 
 ---
 
+## [2026-05-06] — FANGS cards: icon top-alignment, responsive scaling, equal heights
+
+### Fixed
+- `.fc` inner grid changed from `align-items: center` → `align-items: start` + `align-content: start` so the icon always anchors to the top of the title text instead of floating to the vertical midpoint of multi-line titles (which shifted visually at different viewport widths).
+- `.fc .fc-icon` and `.fc .fc-title` both get explicit `align-self: start` to guarantee top-alignment regardless of row height.
+- `flex-shrink: 0` added to `.fc .fc-icon` to prevent the circle from compressing when the title text is very long.
+- `grid-template-rows: auto 1fr` added to `.fc` so the description row expands to fill any remaining card height — ensures all 4 cards distribute their internal space consistently.
+
+### Changed
+- `.feat-grid` now has `align-items: stretch` set explicitly (was relying on CSS grid default) to guarantee all 4 cards in a row stretch to the same height.
+- Icon responsive scaling added:
+  - `≤960px`: icon `57px → 48px`
+  - `≤640px`: icon `42px`, card padding `2.2rem → 1.6rem`, title `1.875rem → 1.5rem`
+
+---
+
 ## [2026-05-06] — v3 release: merged madmusicmaker branch into master
 
 **Merged by:** MrJustJinx  

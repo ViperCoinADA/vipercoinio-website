@@ -173,16 +173,16 @@ footer p{font-size:0.82rem;color:rgba(255,255,255,0.25);}
 
 /* FEATURE SECTION */
 .feat-section{padding:5rem;background-color:var(--bg);background-image:radial-gradient(var(--dot-dark) 1.5px,transparent 1.5px);background-size:24px 24px;}
-.feat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1.2rem;margin-top:3rem;}
-.fc{padding:2.2rem;display:grid;grid-template-columns:1fr auto;gap:1rem;align-items:center;border:2px solid var(--border);background:var(--fc-color,var(--red));color:#000;transition:all 0.3s;position:relative;overflow:hidden;cursor:default;}
+.feat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1.2rem;margin-top:3rem;align-items:stretch;}
+.fc{padding:2.2rem;display:grid;grid-template-columns:1fr auto;grid-template-rows:auto 1fr;gap:1rem 1rem;align-items:start;align-content:start;border:2px solid var(--border);background:var(--fc-color,var(--red));color:#000;transition:all 0.3s;position:relative;overflow:hidden;cursor:default;}
 .fc:hover{transform:translateY(-6px);border-color:#fff;box-shadow:0 16px 36px var(--fc-shadow,rgba(214,60,42,0.1));}
 .fc-icon{font-size:2.4rem;margin-bottom:1rem;display:flex;align-items:center;}
 .fc-icon img{width:52px;height:52px;object-fit:contain;display:block;}
-.fc .fc-icon{width:57px;height:57px;border-radius:50%;background:rgba(255,255,255,0.3);border:1px solid #000;justify-content:center;margin-bottom:0;overflow:hidden;grid-column:2;grid-row:1;}
+.fc .fc-icon{width:57px;height:57px;flex-shrink:0;border-radius:50%;background:rgba(255,255,255,0.3);border:1px solid #000;justify-content:center;margin-bottom:0;overflow:hidden;grid-column:2;grid-row:1;align-self:start;}
 .fc .fc-icon img{width:100%;height:100%;object-fit:cover;}
 .fc .fc-icon img[src*="cardano-starburst"]{object-fit:contain;width:80%;height:80%;}
 .fc-title{font-family:'TGS Perfect Condensed',sans-serif;font-size:1.875rem;letter-spacing:2px;margin-bottom:0.5rem;text-transform:uppercase;}
-.fc .fc-title{margin-bottom:0;line-height:1.05;grid-column:1;grid-row:1;}
+.fc .fc-title{margin-bottom:0;line-height:1.05;grid-column:1;grid-row:1;align-self:start;}
 .fc-desc{font-size:0.87rem;color:#000;line-height:1.6;}
 .fc .fc-desc{grid-column:1 / -1;grid-row:2;}
 
@@ -464,6 +464,7 @@ footer p{font-size:0.82rem;color:rgba(255,255,255,0.25);}
   .sp-red,.sp-dark{padding:3rem 2rem;}
   .stats-row{grid-template-columns:repeat(2,1fr);}
   .feat-section,.lore-blocks,.steps-sec,.big-cta,.team-sec,.nft-showcase,.nft-platforms,.mission-sec{padding:3rem 2rem;}
+  .fc .fc-icon{width:48px;height:48px;}
   .prod-hero{padding:160px 2rem 3rem;}
   .token-visual{grid-template-columns:1fr;padding:3rem 2rem;gap:2rem;}
   .mission-sec{grid-template-columns:1fr;}
@@ -476,6 +477,9 @@ footer p{font-size:0.82rem;color:rgba(255,255,255,0.25);}
   .stat-cell{padding:1.4rem 1rem;}
   .stat-num{font-size:2.2rem;}
   .feat-section,.lore-blocks,.steps-sec,.big-cta,.team-sec,.nft-showcase{padding:2.5rem 1.2rem;}
+  .fc{padding:1.6rem;}
+  .fc .fc-icon{width:42px;height:42px;}
+  .fc-title,.fc .fc-title{font-size:1.5rem;}
   .prod-hero{padding:160px 1.2rem 2.5rem;}
   .meme-grid{grid-template-columns:repeat(auto-fill,minmax(140px,1fr));padding:1rem;}
   .meme-head{padding:160px 1.2rem 1.5rem;}
