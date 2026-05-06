@@ -343,6 +343,22 @@ footer p{font-size:0.82rem;color:rgba(255,255,255,0.25);}
 .pc-desc{font-size:0.88rem;color:var(--text);line-height:1.7;margin-bottom:1.5rem;}
 .pc-img{width:100%;height:64px;object-fit:contain;margin-bottom:1rem;filter:drop-shadow(0 4px 12px rgba(0,0,0,0.3));}
 
+/* PRODUCTS — FANGS THEME */
+.pc.pc-fangs{background:var(--pc-color,var(--green));border-color:transparent;border-radius:0;color:#000;}
+.pc.pc-fangs:hover{border-color:#fff;box-shadow:0 20px 50px var(--pc-shadow,rgba(111,228,46,0.35));}
+.pc.pc-fangs .pc-top{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;border-bottom:none;}
+.pc.pc-fangs .pc-name{color:#000;font-size:1.875rem;line-height:1.05;letter-spacing:2px;}
+.pc.pc-fangs .pc-badge{background:#000;color:var(--green);border-color:#000;}
+.pc.pc-fangs .pc-desc{color:#000;}
+.pc.pc-fangs .btn-ghost{border-color:#fff;color:#fff;background:#000;}
+.pc.pc-fangs .btn-ghost:hover{box-shadow:inset 0 -2px 0 0 #fff;padding:11px 36px 15px 36px;background:#000;}
+.pc-fangs-icon{width:57px;height:57px;flex-shrink:0;border-radius:50%;background:rgba(255,255,255,0.3);border:1px solid #000;overflow:hidden;display:flex;align-items:center;justify-content:center;}
+.pc-fangs-icon img{width:100%;height:100%;object-fit:cover;}
+.pc-green{--pc-color:#6fe42e;--pc-shadow:rgba(111,228,46,0.45);}
+.pc-magenta{--pc-color:#de5af2;--pc-shadow:rgba(222,90,242,0.45);}
+.pc-gold{--pc-color:#ffa621;--pc-shadow:rgba(255,166,33,0.45);}
+.pc-cyan{--pc-color:#00d4e8;--pc-shadow:rgba(0,212,232,0.45);}
+
 /* ══════════════════════════════════════
    NFT PAGE
 ══════════════════════════════════════ */
@@ -672,17 +688,17 @@ footer p{font-size:0.82rem;color:rgba(255,255,255,0.25);}
       <div class="step reveal">
         <span class="step-num">01</span>
         <div class="step-title">GET A WALLET</div>
-        <div class="step-desc">Download Eternl, Nami, or any Cardano-compatible wallet. Set it up and secure your seed phrase.</div>
+        <div class="step-desc">Download Eternl, Lace, Vespr, or any Cardano-compatible wallet. Set it up and secure your seed phrase.</div>
       </div>
       <div class="step reveal delay-1">
         <span class="step-num">02</span>
         <div class="step-title">BUY ADA</div>
-        <div class="step-desc">Purchase ADA from any exchange — Binance, Coinbase, Kraken. Send it to your Cardano wallet.</div>
+        <div class="step-desc">Purchase ADA from ViperSwap.io — We provide Fiat On/Offramp options.</div>
       </div>
       <div class="step reveal delay-2">
         <span class="step-num">03</span>
         <div class="step-title">SWAP ON DEX</div>
-        <div class="step-desc">Head to ViperSwap or any Cardano DEX. Swap your ADA for $VIPER tokens in seconds.</div>
+        <div class="step-desc">On ViperSwap DEX. Swap your ADA for $VIPER tokens in seconds.</div>
       </div>
       <div class="step reveal delay-3">
         <span class="step-num">04</span>
@@ -789,11 +805,12 @@ footer p{font-size:0.82rem;color:rgba(255,255,255,0.25);}
 
   <footer>
     <div class="footer-logo"><img src="assets/logo.png" alt="ViperCoin" onerror="this.style.display='none'"> VIPER<span class="slash">COIN</span></div>
-    <p>&copy; 2026 VIPERCOIN. The Coin with Fangs.</p>
+    <p>&copy; 2026 VIPERCOIN. The Coin with Fangs. Powered by Cardano.</p>
     <div class="footer-links">
-      <a href="https://x.com/vipercoin_ada" target="_blank" rel="noopener noreferrer">TWITTER</a>
+      <a href="https://x.com/vipercoin_ada" target="_blank" rel="noopener noreferrer">X / TWITTER</a>
       <a href="https://discord.gg/vipercoin" target="_blank" rel="noopener noreferrer">DISCORD</a>
       <a href="https://linktr.ee/vipercoin_ada" target="_blank" rel="noopener noreferrer">LINKTREE</a>
+      <a href="https://viperswap.io" target="_blank" rel="noopener noreferrer">VIPERSWAP</a>
     </div>
   </footer>
 </div>
@@ -814,17 +831,19 @@ footer p{font-size:0.82rem;color:rgba(255,255,255,0.25);}
           <div class="progress-bar-wrap" id="progress-wrap"><div id="progress-bar"></div></div>
           <span id="dl-progress">Preparing zip...</span>
         </div>
-        <button id="dl-all-btn" onclick="downloadAll()">&#x21E9; DOWNLOAD ALL (ZIP)</button>
+        <button type="button" id="dl-all-btn" onclick="downloadAll()">&#x21E9; DOWNLOAD ALL (ZIP)</button>
       </div>
     </div>
   </div>
   <div class="meme-grid" id="meme-grid"></div>
   <footer>
     <div class="footer-logo"><img src="assets/logo.png" alt="ViperCoin" onerror="this.style.display='none'"> VIPER<span class="slash">COIN</span></div>
-    <p>&copy; 2026 VIPERCOIN. The Coin with Fangs.</p>
+    <p>&copy; 2026 VIPERCOIN. The Coin with Fangs. Powered by Cardano.</p>
     <div class="footer-links">
-      <a href="https://x.com/vipercoin_ada" target="_blank" rel="noopener noreferrer">TWITTER</a>
+      <a href="https://x.com/vipercoin_ada" target="_blank" rel="noopener noreferrer">X / TWITTER</a>
       <a href="https://discord.gg/vipercoin" target="_blank" rel="noopener noreferrer">DISCORD</a>
+      <a href="https://linktr.ee/vipercoin_ada" target="_blank" rel="noopener noreferrer">LINKTREE</a>
+      <a href="https://viperswap.io" target="_blank" rel="noopener noreferrer">VIPERSWAP</a>
     </div>
   </footer>
 </div>
@@ -895,10 +914,12 @@ footer p{font-size:0.82rem;color:rgba(255,255,255,0.25);}
 
   <footer>
     <div class="footer-logo"><img src="assets/logo.png" alt="ViperCoin" onerror="this.style.display='none'"> VIPER<span class="slash">COIN</span></div>
-    <p>&copy; 2026 VIPERCOIN.</p>
+    <p>&copy; 2026 VIPERCOIN. The Coin with Fangs. Powered by Cardano.</p>
     <div class="footer-links">
-      <a href="https://x.com/vipercoin_ada" target="_blank" rel="noopener noreferrer">TWITTER</a>
+      <a href="https://x.com/vipercoin_ada" target="_blank" rel="noopener noreferrer">X / TWITTER</a>
       <a href="https://discord.gg/vipercoin" target="_blank" rel="noopener noreferrer">DISCORD</a>
+      <a href="https://linktr.ee/vipercoin_ada" target="_blank" rel="noopener noreferrer">LINKTREE</a>
+      <a href="https://viperswap.io" target="_blank" rel="noopener noreferrer">VIPERSWAP</a>
     </div>
   </footer>
 </div>
@@ -916,39 +937,68 @@ footer p{font-size:0.82rem;color:rgba(255,255,255,0.25);}
   <div class="color-stripe"><div class="cs-red"></div><div class="cs-orange"></div><div class="cs-gold"></div><div class="cs-green"></div><div class="cs-cyan"></div><div class="cs-purple"></div><div class="cs-pink"></div></div>
 
   <div class="prod-grid">
-    <div class="pc live reveal">
+
+    <div class="pc live reveal pc-fangs pc-green">
       <div class="pc-top">
-        <img class="pc-img" src="assets/viperswap.png" alt="ViperSwap" onerror="this.style.display='none'">
-        <div class="pc-name">VIPERSWAP</div>
-        <span class="pc-badge badge-live">&#x25CF; LIVE</span>
+        <div>
+          <div class="pc-name">VIPERSWAP</div>
+          <span class="pc-badge">&#x25CF; LIVE</span>
+        </div>
+        <div class="pc-fangs-icon">
+          <img src="assets/viperswap.png" alt="ViperSwap" onerror="this.style.display='none'">
+        </div>
       </div>
       <div class="pc-body">
         <p class="pc-desc">The premier decentralized exchange for the ViperCoin ecosystem. Swap assets on Cardano with lightning speed and minimal fees. Also supports cross-chain swapping functionality.</p>
-        <a href="https://viperswap.io" target="_blank" rel="noopener noreferrer" class="btn-green">LAUNCH APP &#x2197;</a>
+        <a href="https://viperswap.io" target="_blank" rel="noopener noreferrer" class="btn-ghost">LAUNCH APP &#x2197;</a>
       </div>
     </div>
 
-    <div class="pc live reveal delay-1">
+    <div class="pc live reveal delay-1 pc-fangs pc-magenta">
       <div class="pc-top">
-        <img class="pc-img" src="Images/2b.png" alt="Meme Vault">
-        <div class="pc-name">MEME VAULT</div>
-        <span class="pc-badge badge-live">&#x25CF; LIVE</span>
+        <div>
+          <div class="pc-name">MEME VAULT</div>
+          <span class="pc-badge">&#x25CF; LIVE</span>
+        </div>
+        <div class="pc-fangs-icon">
+          <img src="Images/2b.png" alt="Meme Vault" onerror="this.style.display='none'">
+        </div>
       </div>
       <div class="pc-body">
         <p class="pc-desc"><span class="js-meme-count">562</span>+ community-created memes available to download, share, and spread across the internet. The most prolific meme treasury on Cardano. Regularly updated.</p>
-        <a href="#" class="btn-red" onclick="goto('memes');return false;">VIEW MEMES</a>
+        <a href="#" class="btn-ghost" onclick="goto('memes');return false;">VIEW MEMES</a>
       </div>
     </div>
 
-    <div class="pc live reveal delay-2">
+    <div class="pc live reveal delay-2 pc-fangs pc-gold">
       <div class="pc-top">
-        <img class="pc-img" src="Images/NFT Energy Design Concept.png" alt="Viper NFTs">
-        <div class="pc-name">VIPER NFTS</div>
-        <span class="pc-badge badge-live">&#x25CF; LIVE</span>
+        <div>
+          <div class="pc-name">VIPER NFTS</div>
+          <span class="pc-badge">&#x25CF; LIVE</span>
+        </div>
+        <div class="pc-fangs-icon">
+          <img src="Images/NFT Energy Design Concept.png" alt="Viper NFTs" onerror="this.style.display='none'">
+        </div>
       </div>
       <div class="pc-body">
         <p class="pc-desc">Exclusive hand-crafted ViperCoin NFT collection available on WayUp. Own a piece of the serpent lore. Rare, unique, and dripping with venom.</p>
-        <a href="https://www.wayup.io/collection/45851dd847cf1e49b795f3c6c998e1eb18b9d30afa71e4ce8bff4183" target="_blank" rel="noopener noreferrer" class="btn-gold">VIEW COLLECTION &#x2197;</a>
+        <a href="https://www.wayup.io/collection/45851dd847cf1e49b795f3c6c998e1eb18b9d30afa71e4ce8bff4183" target="_blank" rel="noopener noreferrer" class="btn-ghost">VIEW COLLECTION &#x2197;</a>
+      </div>
+    </div>
+
+    <div class="pc live reveal delay-3 pc-fangs pc-cyan">
+      <div class="pc-top">
+        <div>
+          <div class="pc-name">WADE<br>STAKE POOL</div>
+          <span class="pc-badge">&#x25CF; LIVE</span>
+        </div>
+        <div class="pc-fangs-icon">
+          <img src="assets/Viper_Head%20transparant.png" alt="WADE Stake Pool">
+        </div>
+      </div>
+      <div class="pc-body">
+        <p class="pc-desc">Stake your ADA with the WADE pool and earn rewards while directly supporting the ViperCoin ecosystem. Every delegation strengthens the serpent. Your stake, our venom.</p>
+        <a href="https://pool.pm/c2ebd43e5e8ecc22562aa09ce35d107677f46f216cc069693ecb4551" target="_blank" rel="noopener noreferrer" class="btn-ghost">STAKE NOW &#x2197;</a>
       </div>
     </div>
 
@@ -956,10 +1006,11 @@ footer p{font-size:0.82rem;color:rgba(255,255,255,0.25);}
 
   <footer>
     <div class="footer-logo"><img src="assets/logo.png" alt="ViperCoin" onerror="this.style.display='none'"> VIPER<span class="slash">COIN</span></div>
-    <p>&copy; 2026 VIPERCOIN.</p>
+    <p>&copy; 2026 VIPERCOIN. The Coin with Fangs. Powered by Cardano.</p>
     <div class="footer-links">
-      <a href="https://x.com/vipercoin_ada" target="_blank" rel="noopener noreferrer">TWITTER</a>
+      <a href="https://x.com/vipercoin_ada" target="_blank" rel="noopener noreferrer">X / TWITTER</a>
       <a href="https://discord.gg/vipercoin" target="_blank" rel="noopener noreferrer">DISCORD</a>
+      <a href="https://linktr.ee/vipercoin_ada" target="_blank" rel="noopener noreferrer">LINKTREE</a>
       <a href="https://viperswap.io" target="_blank" rel="noopener noreferrer">VIPERSWAP</a>
     </div>
   </footer>
@@ -1049,10 +1100,12 @@ footer p{font-size:0.82rem;color:rgba(255,255,255,0.25);}
 
   <footer>
     <div class="footer-logo"><img src="assets/logo.png" alt="ViperCoin" onerror="this.style.display='none'"> VIPER<span class="slash">COIN</span></div>
-    <p>&copy; 2026 VIPERCOIN.</p>
+    <p>&copy; 2026 VIPERCOIN. The Coin with Fangs. Powered by Cardano.</p>
     <div class="footer-links">
-      <a href="https://x.com/vipercoin_ada" target="_blank" rel="noopener noreferrer">TWITTER</a>
+      <a href="https://x.com/vipercoin_ada" target="_blank" rel="noopener noreferrer">X / TWITTER</a>
       <a href="https://discord.gg/vipercoin" target="_blank" rel="noopener noreferrer">DISCORD</a>
+      <a href="https://linktr.ee/vipercoin_ada" target="_blank" rel="noopener noreferrer">LINKTREE</a>
+      <a href="https://viperswap.io" target="_blank" rel="noopener noreferrer">VIPERSWAP</a>
     </div>
   </footer>
 </div>
@@ -1097,10 +1150,12 @@ footer p{font-size:0.82rem;color:rgba(255,255,255,0.25);}
   </div>
   <footer>
     <div class="footer-logo"><img src="assets/logo.png" alt="ViperCoin" onerror="this.style.display='none'"> VIPER<span class="slash">COIN</span></div>
-    <p>&copy; 2026 VIPERCOIN.</p>
+    <p>&copy; 2026 VIPERCOIN. The Coin with Fangs. Powered by Cardano.</p>
     <div class="footer-links">
-      <a href="https://x.com/vipercoin_ada" target="_blank" rel="noopener noreferrer">TWITTER</a>
+      <a href="https://x.com/vipercoin_ada" target="_blank" rel="noopener noreferrer">X / TWITTER</a>
       <a href="https://discord.gg/vipercoin" target="_blank" rel="noopener noreferrer">DISCORD</a>
+      <a href="https://linktr.ee/vipercoin_ada" target="_blank" rel="noopener noreferrer">LINKTREE</a>
+      <a href="https://viperswap.io" target="_blank" rel="noopener noreferrer">VIPERSWAP</a>
     </div>
   </footer>
 </div>
@@ -1172,6 +1227,13 @@ function closeMobile(){
   document.getElementById('hbg').classList.remove('open');
   document.getElementById('mmenu').classList.remove('open');
 }
+document.addEventListener('click',function(e){
+  const menu=document.getElementById('mmenu');
+  const hbg=document.getElementById('hbg');
+  if(menu.classList.contains('open')&&!menu.contains(e.target)&&!hbg.contains(e.target)){
+    closeMobile();
+  }
+});
 
 // ═══════════════════════════════════
 //  CANVAS PARTICLES (HERO)
@@ -1403,7 +1465,7 @@ function initCharSlideshow(){
     slides[idx].classList.remove('active');
     idx=(idx+1)%slides.length;
     slides[idx].classList.add('active');
-  },10000);
+  },5000);
 }
 
 // ═══════════════════════════════════

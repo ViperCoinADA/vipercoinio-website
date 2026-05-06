@@ -14,6 +14,37 @@ Format:
 
 ---
 
+## [2026-05-06] — Session: Products page, footer, nav, copy, slideshow
+
+### Added
+- **WADE Stake Pool card** added as 4th block on Products & Services page.
+  - Pool ID: `c2ebd43e5e8ecc22562aa09ce35d107677f46f216cc069693ecb4551`
+  - Links to `https://pool.pm/c2ebd43e...`
+  - Uses `assets/Viper_Head transparant.png` as circular icon
+  - Cyan FANGS colour (`#00d4e8`) matching the site palette
+- **Mobile nav: click-outside-to-close** — `document` click listener added; menu closes when any click lands outside both the menu (`#mmenu`) and the hamburger (`#hbg`).
+
+### Changed
+- **Products & Services — FANGS theme applied to all 4 cards:**
+  - All cards (`pc-fangs` modifier) now use solid accent fill background, circular icon badge (57px, `rgba(255,255,255,0.3)` fill, `1px solid #000`), black text, square corners, coloured drop-shadow on hover.
+  - Colour assignments: ViperSwap → green `#6fe42e`, Meme Vault → magenta `#de5af2`, Viper NFTs → gold `#ffa621`, WADE Stake Pool → cyan `#00d4e8`.
+  - Colour classes (`.pc-green`, `.pc-magenta`, `.pc-gold`, `.pc-cyan`) added to stylesheet — no inline styles.
+  - Dividing line between card top and body removed (`border-bottom: none`).
+  - Buttons: black background, white text and border (`background:#000; color:#fff; border-color:#fff`).
+  - LIVE badge: black background, green text and dot (`background:#000; color:var(--green)`).
+  - ViperSwap icon: removed `object-fit: contain` override — now fills circle with `cover` like other cards.
+- **Character slideshow interval:** `10000ms → 5000ms` (each character shows for 5 seconds).
+- **Footer standardised across all 7 pages** to match the home page exactly:
+  - Copyright: `© 2026 VIPERCOIN. The Coin with Fangs. Powered by Cardano.`
+  - Links: X / TWITTER · DISCORD · LINKTREE · VIPERSWAP
+  - Previously: inconsistent copyright text, some pages missing LINKTREE or VIPERSWAP, Twitter labelled without "X /".
+- **HOW IT WORKS step copy updates (Home page):**
+  - Step 1 (wallet): `"Eternl, Nami, or any…"` → `"Eternl, Lace, Vespr, or any…"`
+  - Step 2 (get ADA): `"Purchase ADA from any exchange — Binance, Coinbase, Kraken…"` → `"Purchase ADA from ViperSwap.io — We provide Fiat On/Offramp options."`
+  - Step 3 (swap): `"Head to ViperSwap or any Cardano DEX…"` → `"On ViperSwap DEX. Swap your ADA for $VIPER tokens in seconds."`
+
+---
+
 ## [2026-05-06] — FANGS cards: icon top-alignment, responsive scaling, equal heights
 
 ### Fixed
