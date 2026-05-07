@@ -14,6 +14,107 @@ Format:
 
 ---
 
+## [2026-05-06] — BITE BACK value cards: same border + dropshadow as other cards
+
+### Changed
+- `.val-card` (Community First / Transparency / Culture & Memes / Real Utility under "BITE BACK. BUILD FORWARD." on About Us): `border-radius: 10px → 0`, border `1px → 2px solid var(--border)`, hover lift `-3px → -6px`, and added `box-shadow: 0 16px 36px var(--fc-shadow)` per card.
+- Each `.vc-*` modifier now declares its `--fc-shadow` rgba (red / green / gold / purple at 0.45 alpha) so the hover glow matches the card's accent.
+
+---
+
+## [2026-05-06] — Footer text recolored to full white
+
+### Changed
+- `footer p` (copyright line) color `rgba(255,255,255,0.25) → #fff`.
+- `.footer-links a` color `rgba(255,255,255,0.3) → #fff`. Hover stays at `var(--red-btn)` for the colour-change feedback.
+
+---
+
+## [2026-05-06] — Footer link order: VIPERSWAP before LINKTREE
+
+### Changed
+- Footer link order on all 7 pages: `X / TWITTER · DISCORD · LINKTREE · VIPERSWAP → X / TWITTER · DISCORD · VIPERSWAP · LINKTREE`. VIPERSWAP now sits ahead of LINKTREE in the footer link row.
+
+---
+
+## [2026-05-06] — Products & Services: VIEW MEMES button gets the trailing arrow
+
+### Changed
+- MEME VAULT card button text `"VIEW MEMES" → "VIEW MEMES ↗"` so all four Products & Services card buttons (LAUNCH APP, VIEW MEMES, VIEW COLLECTION, STAKE NOW) now end with the same trailing arrow.
+
+---
+
+## [2026-05-06] — Footer logo lifted + nav logo locked to one size
+
+### Changed
+- `.footer-logo img` got `transform: translateY(-1.5px)` — proportional to the menu's `-3px` lift at half scale. Footer logo image now sits visually offset from the text the same amount as the menu version.
+- Removed the `.nav-logo {font-size: 1.65rem; letter-spacing: 2px}` and `.nav-logo img {height: 36px}` overrides from the 1300px responsive breakpoint. The menu logo (viper head image + VIPER COIN text) now stays at its desktop size (`2.4rem` font, `64px` image) across every breakpoint until the hamburger break. The menu link items still shrink at 1300px.
+
+---
+
+## [2026-05-06] — Footer "COIN" text recolored to red
+
+### Changed
+- `.footer-logo .slash` color `var(--gold) → var(--red-btn)` so the "COIN" half of "VIPER COIN" reads red in the footer (the menu version stays gold).
+
+---
+
+## [2026-05-06] — Footer logo scaled to 50% of menu size
+
+### Changed
+- Footer logo dimensions halved relative to the nav: font-size `2.4rem → 1.2rem`, image height `64px → 32px`, gap `10px → 5px`, slash `margin-left: -3px → -1.5px`. Same image, same colours, same proportions — just half the size to suit the footer context.
+
+---
+
+## [2026-05-06] — Footer logo unified with the menu logo
+
+### Changed
+- `.footer-logo` text styling updated to match `.nav-logo`: `font-size: 1.4rem → 2.4rem`, `letter-spacing: 3px → 0.5px`, `gap: 8px → 10px`. `.slash` color `var(--red-btn) → var(--gold)` (with `margin-left: -3px` to mirror the nav VIPER↔COIN spacing).
+- Footer logo image height `28px → 64px`; `filter: drop-shadow(... red glow)` removed; `object-fit: contain` added.
+- Footer logo image src `assets/logo.png → assets/Viper_Head%20transparant.png` across all 7 page footers — same viper head transparent PNG used in the menu.
+
+---
+
+## [2026-05-06] — Contact + About cards: square corners, 2px border, colored hover shadow
+
+### Changed
+- `.tc` (About Us team cards: Jinx, Madmusicmaker, MikeyExile, Snekable) `border-radius: 12px → 0`, `border: 1px → 2px`, hover shadow `rgba(0,0,0,0.3) → var(--tc-shadow)` (colored per card). Lift bumped `translateY(-5px) → -6px` to match the FANGS / NFT-platform cards. Each `.tc-*` modifier now declares its `--tc-shadow` rgba (red / green / cyan / gold at 0.45 alpha).
+- `.contact-fc` (Contact page social cards: X / Discord / ViperSwap / WayUp) same treatment: `border-radius: 12px → 0`, `border: 1px → 2px`, hover shadow now `var(--fc-shadow)` per card. Each `.cfc-*` modifier (`cfc-tw` Twitter blue, `cfc-dc` green, `cfc-vs` gold, `cfc-wu` red) declares its `--fc-shadow` to match.
+- Both card families now share the unified site-wide hover pattern: square corners, 2px accent-color border on hover, colored 16px×36px drop-shadow at 0.45 alpha, `translateY(-6px)` lift.
+
+---
+
+## [2026-05-06] — DOWNLOAD ALL button conformed to site pill shape
+
+### Changed
+- `#dl-all-btn` (Memes page DOWNLOAD ALL ZIP button) `border-radius: 7px → 50px` to match every other button on the site (full pill shape rather than the rounded-rectangle outlier).
+
+---
+
+## [2026-05-06] — NFT page platform card buttons match card accent colors
+
+### Added
+- New `.btn-cyan` class — same shape/size/hover treatment as the other coloured buttons, with `background: var(--cyan)`.
+
+### Changed
+- WAYUP card → keeps `.btn-gold` (gold accent matches gold card).
+- THE COLLECTION card button: `class="btn-ghost" → class="btn-green"`, text `"JOIN FOR DROPS" → "JOIN FOR DROPS ↗"` so the button matches the card's green accent.
+- NFT UTILITY card button: `class="btn-ghost" → class="btn-cyan"`, text `"LEARN MORE" → "LEARN MORE ↗"` so the button matches the card's cyan accent.
+- All three buttons now use the same OPEN MARKETPLACE-style pill (filled accent, white border, trailing ↗ arrow, identical hover) — only the colour changes per card.
+
+---
+
+## [2026-05-06] — NFT page platform cards: FANGS-style hover glow + square corners
+
+### Changed
+- `.plc` cards (WAYUP / THE COLLECTION / NFT UTILITY on the NFT page below the hero) `border-radius: 14px → 0` for square corners.
+- `.plc` background hardened from translucent `rgba(255,255,255,0.015)` to solid `#000` so the dark card body reads as flat black.
+- `.plc` border thickened `1px → 2px` to match the FANGS card border weight.
+- `.plc:hover` rewritten with the FANGS-style colored glow: `transform: translateY(-6px); border-color: var(--fc-color); box-shadow: 0 16px 36px var(--fc-shadow)`. Kept the original accent-color hover border (each card hovers to its own gold/green/cyan/red border) and added the matching colored shadow on top.
+- Each `.plc-*` color modifier now declares its own `--fc-shadow` rgba (gold / green / cyan / red at 0.45 alpha) so the hover glow matches the card's accent color, same pattern as `.fc-*` on the home page.
+
+---
+
 ## [2026-05-06] — Session: Products page, footer, nav, copy, slideshow
 
 ### Added
