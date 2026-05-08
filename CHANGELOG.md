@@ -14,6 +14,40 @@ Format:
 
 ---
 
+## [2026-05-08] — v4: Meme page tab switcher (MEMES / GIFs / STICKERS)
+
+### Added
+- **Media tab buttons** — three pill buttons (MEMES / GIFs / STICKERS) appear below the "X memes & counting" line on the Memes page and switch the gallery between content types.
+- **`buildGifList()`** — generates 40 GIF filenames (`Viper_GIF_0001.gif` → `Viper_GIF_0040.gif`) from `Viper GIFs/`.
+- **`buildStickerList()`** — generates 45 sticker filenames (`Viper_Sticker_0001.png` → `Viper_Sticker_0046.png`, skipping `0005` which is missing) from `Viper Stickers/`.
+- **`switchTab(tab)`** — switches the active tab, rebuilds the grid, and updates the count line (e.g. "40 GIFs & counting…").
+- **`buildActiveGrid()`** — replaces `buildMemeGrid()` as the unified grid builder; tab-aware, uses the correct list/folder/label for whichever tab is active.
+- **`Viper GIFs/`** and **`Viper Stickers/`** folders added to the repository (40 GIFs, 45 stickers).
+
+### Changed
+- **GIF cards skip `loading="lazy"`** — all 40 GIFs auto-play immediately when the GIFs tab is loaded. Memes and Stickers still use lazy loading.
+- **DOWNLOAD ALL (ZIP)** is tab-aware: produces `ViperCoin_GIFs.zip`, `ViperCoin_Stickers.zip`, or `ViperCoin_Memes.zip` depending on the active tab.
+- **Lightbox label** updates per tab: MEME #0001, GIF #0001, or STICKER #0001.
+- **SHARE ON X** and single DOWNLOAD work correctly for all three media types.
+- **Count line** dynamically updates to show the correct count and label when switching tabs.
+- **Active file renamed** `Website v3.html` → `Website v4.html`.
+
+---
+
+## [2026-05-08] — v4: Pulled madmusicmaker — card hover, footer logo, button consistency
+
+### Changed
+- **Card hover unified site-wide** — `.plc` (NFT platform), `.tc` (About team), `.contact-fc` (Contact social), and `.val-card` (BITE BACK value cards) all share: square corners, 2px border, `translateY(-6px)` lift, per-card colored `0 16px 36px` box-shadow at 0.45 alpha.
+- **NFT platform card buttons** match card accent colors: WAYUP → `btn-gold`, THE COLLECTION → `btn-green` ("JOIN FOR DROPS ↗"), NFT UTILITY → new `btn-cyan` ("LEARN MORE ↗").
+- **DOWNLOAD ALL (ZIP)** `border-radius: 7px → 50px` (now a pill like all other buttons).
+- **Products VIEW MEMES button** gets trailing `↗` arrow for consistency with the other three product card buttons.
+- **Footer logo** swapped to `assets/Viper_Head transparant.png` across all 7 footers, scaled to 50% of nav size (1.2rem font / 32px image). "COIN" text recolored red in footer (gold stays in nav).
+- **Footer text/links** recolored from `rgba(255,255,255,0.25–0.3)` to `#fff`.
+- **Footer link order** — VIPERSWAP now precedes LINKTREE on all 7 pages.
+- **Nav logo** — 1300px breakpoint shrink removed; logo stays at desktop size across all widths (menu link items still shrink at 1300px).
+
+---
+
 ## [2026-05-06] — Session: Products page, footer, nav, copy, slideshow
 
 ### Added

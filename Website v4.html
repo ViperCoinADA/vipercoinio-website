@@ -1,0 +1,1531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VIPERCOIN — The Coin with Fangs | v3</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+@font-face{font-family:'TGS Perfect Condensed';src:url('assets/fonts/TGSPerfectCondensed.woff2') format('woff2'),url('assets/fonts/TGSPerfectCondensed.woff') format('woff');font-weight:normal;font-style:normal;font-display:swap;}
+@font-face{font-family:'Slash Signature';src:url('assets/fonts/SlashSignature.woff2') format('woff2'),url('assets/fonts/SlashSignature.woff') format('woff');font-weight:normal;font-style:normal;font-display:swap;}
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+<style>
+:root{
+  --bg:#000000; --bg2:#111111; --bg3:#1a1a1a;
+  --red:#d63c2a; --red-btn:#e04535;
+  --green:#6fe42e; --green-glow:rgba(111,228,46,0.2);
+  --purple:#8b3fc8; --cyan:#00d4e8; --gold:#ffa621;
+  --cream:#eee8d4; --cream-dark:#e0d9c4;
+  --dot-dark:rgba(255,255,255,0.04);
+  --dot-cream:rgba(0,0,0,0.07);
+  --border:rgba(255,255,255,0.08);
+  --text:rgba(255,255,255,0.6);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:#fff;font-family:'Bitter',serif;overflow-x:hidden;}
+
+.dots-dark{background-color:var(--bg);background-image:radial-gradient(var(--dot-dark) 1.5px,transparent 1.5px);background-size:24px 24px;}
+.dots-dark2{background-color:var(--bg2);background-image:radial-gradient(var(--dot-dark) 1.5px,transparent 1.5px);background-size:24px 24px;}
+.dots-cream{background-color:var(--cream);background-image:radial-gradient(var(--dot-cream) 1.5px,transparent 1.5px);background-size:24px 24px;}
+
+/* NAV */
+nav{position:fixed;top:24px;left:28px;right:28px;z-index:1000;display:flex;align-items:center;justify-content:space-between;padding:0 1.1rem 0 1.8rem;height:88px;background-color:#000;-webkit-backdrop-filter:blur(28px);backdrop-filter:blur(28px);border-radius:50px;border:1px solid rgba(255,255,255,0.55);}
+.nav-logo{font-family:'TGS Perfect Condensed',sans-serif;font-size:2.4rem;letter-spacing:0.5px;color:#fff;text-decoration:none;display:flex;align-items:center;gap:10px;}
+.nav-logo img{height:64px;width:auto;object-fit:contain;transform:translateY(-3px);}
+.nav-logo .slash{color:var(--gold);margin-left:-3px;}
+.nav-links{display:flex;list-style:none;gap:0;align-items:stretch;height:100%;}
+.nav-links li{display:flex;align-items:center;}
+.nav-links a{font-family:'TGS Perfect Condensed',sans-serif;font-size:1.45rem;font-weight:700;letter-spacing:0.5px;color:#fff;text-decoration:none;padding:0 13px;white-space:nowrap;transition:color 0.2s;border:none;background:none;position:relative;display:flex;align-items:center;height:100%;}
+.nav-links a:hover{color:var(--gold);}
+.nav-links a.active{color:#fff;}
+.nav-links a.active::after{content:"";position:absolute;left:14px;right:14px;bottom:0;height:4px;background:var(--gold);border-radius:0;}
+.nav-cta{font-family:'TGS Perfect Condensed',sans-serif;font-size:1.3rem;letter-spacing:2px;padding:13px 28px;background:#8ded41;color:#000;border:1px solid #fff;border-radius:50px;cursor:pointer;text-decoration:none;transition:box-shadow 0.25s ease,padding 0.25s ease;margin-left:0.6rem;white-space:nowrap;}
+.nav-cta:hover{box-shadow:inset 0 -2px 0 0 #fff;padding:11px 28px 15px 28px;}
+.nav-right{display:flex;align-items:center;}
+.hamburger{display:none;flex-direction:column;align-items:center;justify-content:center;gap:5px;cursor:pointer;width:52px;height:52px;background:#8ded41;border:1px solid #fff;border-radius:50%;transition:box-shadow 0.25s ease,padding 0.25s ease;}
+.hamburger:hover{box-shadow:inset 0 -2px 0 0 #fff;padding-bottom:4px;}
+.hamburger span{display:block;width:18px;height:2px;background:#000;border-radius:2px;transition:all 0.3s;}
+.hamburger.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px);}
+.hamburger.open span:nth-child(2){opacity:0;}
+.hamburger.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px);}
+.mobile-menu{display:none;position:fixed;top:124px;left:12px;right:12px;background:rgba(6,6,6,0.97);-webkit-backdrop-filter:blur(28px);backdrop-filter:blur(28px);border:1px solid rgba(255,255,255,0.09);border-radius:20px;z-index:999;flex-direction:column;padding:1rem;gap:4px;}
+.mobile-menu.open{display:flex;}
+.mobile-menu a{font-family:'TGS Perfect Condensed',sans-serif;font-size:1.2rem;letter-spacing:2px;color:rgba(255,255,255,0.75);text-decoration:none;padding:11px 14px;border-radius:8px;border:none;transition:all 0.2s;}
+.mobile-menu a:hover{color:var(--gold);background:rgba(255,166,33,0.06);}
+.mobile-menu .mob-cta{align-self:center;background:#8ded41;color:#000;border:1px solid #fff;border-radius:50px;text-align:center;margin-top:0.5rem;transition:box-shadow 0.25s ease,padding 0.25s ease;}
+.mobile-menu .mob-cta:hover{box-shadow:inset 0 -2px 0 0 #fff;padding:9px 14px 13px 14px;background:#8ded41;}
+
+/* PAGES */
+.page{display:none;}
+.page.active{display:flex;flex-direction:column;min-height:100vh;}
+.page.active>footer{margin-top:auto;}
+
+/* BUTTONS */
+.btn-red{display:inline-flex;align-self:flex-start;align-items:center;gap:8px;font-family:'TGS Perfect Condensed',sans-serif;font-size:1rem;letter-spacing:3px;padding:13px 36px;background:var(--red-btn);color:#fff;border:1px solid #fff;border-radius:50px;cursor:pointer;text-decoration:none;transition:box-shadow 0.25s ease,padding 0.25s ease;}
+.btn-red:hover{box-shadow:inset 0 -2px 0 0 #fff;padding:11px 36px 15px 36px;}
+.btn-green{display:inline-flex;align-self:flex-start;align-items:center;gap:8px;font-family:'TGS Perfect Condensed',sans-serif;font-size:1rem;letter-spacing:3px;padding:13px 36px;background:var(--green);color:#000;border:1px solid #fff;border-radius:50px;cursor:pointer;text-decoration:none;transition:box-shadow 0.25s ease,padding 0.25s ease;}
+.btn-green:hover{box-shadow:inset 0 -2px 0 0 #fff;padding:11px 36px 15px 36px;}
+.btn-ghost{display:inline-flex;align-self:flex-start;align-items:center;font-family:'TGS Perfect Condensed',sans-serif;font-size:1rem;letter-spacing:3px;padding:13px 36px;background:#000;color:#fff;border:1px solid #fff;border-radius:50px;cursor:pointer;text-decoration:none;transition:box-shadow 0.25s ease,padding 0.25s ease;}
+.btn-ghost:hover{box-shadow:inset 0 -2px 0 0 #fff;padding:11px 36px 15px 36px;}
+.btn-gold{display:inline-flex;align-self:flex-start;align-items:center;gap:8px;font-family:'TGS Perfect Condensed',sans-serif;font-size:1rem;letter-spacing:3px;padding:13px 36px;background:var(--gold);color:#000;border:1px solid #fff;border-radius:50px;cursor:pointer;text-decoration:none;transition:box-shadow 0.25s ease,padding 0.25s ease;}
+.btn-gold:hover{box-shadow:inset 0 -2px 0 0 #fff;padding:11px 36px 15px 36px;}
+.btn-cyan{display:inline-flex;align-self:flex-start;align-items:center;gap:8px;font-family:'TGS Perfect Condensed',sans-serif;font-size:1rem;letter-spacing:3px;padding:13px 36px;background:var(--cyan);color:#000;border:1px solid #fff;border-radius:50px;cursor:pointer;text-decoration:none;transition:box-shadow 0.25s ease,padding 0.25s ease;}
+.btn-cyan:hover{box-shadow:inset 0 -2px 0 0 #fff;padding:11px 36px 15px 36px;}
+
+/* MARQUEE */
+.marquee-bar{overflow:hidden;background:var(--red);border-top:2px solid rgba(255,255,255,0.1);border-bottom:2px solid rgba(255,255,255,0.1);padding:11px 0;}
+.marquee-track{display:flex;animation:mqroll 28s linear infinite;white-space:nowrap;}
+.marquee-item{font-family:'TGS Perfect Condensed',sans-serif;font-size:0.95rem;letter-spacing:4px;padding:0 2.5rem;color:#fff;flex-shrink:0;}
+.marquee-dot{color:var(--gold);}
+@keyframes mqroll{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+
+/* COLOR STRIPE */
+.color-stripe{display:flex;height:5px;}
+.cs-red{flex:1;background:var(--red);}
+.cs-orange{flex:1;background:#e8833a;}
+.cs-gold{flex:1;background:var(--gold);}
+.cs-green{flex:1;background:var(--green);}
+.cs-cyan{flex:1;background:var(--cyan);}
+.cs-purple{flex:1;background:var(--purple);}
+.cs-pink{flex:1;background:#d44fa0;}
+
+/* TAGS */
+.tag{display:inline-block;align-self:flex-start;font-family:'TGS Perfect Condensed',sans-serif;font-size:0.75rem;letter-spacing:4px;padding:5px 10px 5px 14px;border-radius:4px;margin-bottom:1.2rem;background:rgba(224,69,53,0.15);border:1px solid rgba(224,69,53,0.4);color:var(--red-btn);}
+.tag-green{background:rgba(159,217,78,0.12);border:1px solid rgba(159,217,78,0.35);color:var(--green);}
+.tag-gold{background:rgba(255,166,33,0.12);border:1px solid rgba(255,166,33,0.35);color:var(--gold);}
+.tag-dark{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.15);color:rgba(255,255,255,0.6);}
+.tag-cream{background:rgba(0,0,0,0.07);border:1px solid rgba(0,0,0,0.15);color:#555;}
+
+/* SECTION TITLES */
+.sec-title{font-family:'TGS Perfect Condensed',sans-serif;font-size:clamp(2.8rem,5vw,5.5rem);line-height:0.93;letter-spacing:-1px;margin-bottom:1.2rem;}
+.sec-title .r{color:var(--red-btn);}
+.sec-title .g{color:var(--green);}
+.sec-title .gold{color:var(--gold);}
+.sec-title-sm{font-family:'TGS Perfect Condensed',sans-serif;font-size:clamp(1.8rem,3vw,3rem);line-height:1;letter-spacing:-0.5px;margin-bottom:1rem;}
+.sec-sub{font-size:1rem;color:var(--text);line-height:1.7;max-width:560px;}
+
+/* REVEAL ANIMATIONS */
+.reveal{opacity:0;transform:translateY(30px);transition:opacity 0.6s ease,transform 0.6s ease;}
+.reveal.vis{opacity:1;transform:translateY(0);}
+.reveal-left{opacity:0;transform:translateX(-30px);transition:opacity 0.6s ease,transform 0.6s ease;}
+.reveal-left.vis{opacity:1;transform:translateX(0);}
+.reveal-right{opacity:0;transform:translateX(30px);transition:opacity 0.6s ease,transform 0.6s ease;}
+.reveal-right.vis{opacity:1;transform:translateX(0);}
+.delay-1{transition-delay:0.1s;}
+.delay-2{transition-delay:0.2s;}
+.delay-3{transition-delay:0.3s;}
+.delay-4{transition-delay:0.4s;}
+
+/* GLASS CARD */
+.glass{background:rgba(255,255,255,0.035);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border:1px solid var(--border);border-radius:12px;}
+.glass:hover{border-color:rgba(255,255,255,0.14);}
+
+/* FOOTER */
+footer{background:var(--bg2);border-top:2px solid rgba(255,255,255,0.05);padding:2rem 5rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1.2rem;}
+.footer-logo{font-family:'TGS Perfect Condensed',sans-serif;font-size:1.2rem;letter-spacing:0.5px;color:#fff;display:flex;align-items:center;gap:5px;}
+.footer-logo img{height:32px;width:auto;object-fit:contain;transform:translateY(-1.5px);}
+.footer-logo .slash{color:var(--red-btn);margin-left:-1.5px;}
+footer p{font-size:0.82rem;color:#fff;}
+.footer-links{display:flex;gap:1.5rem;}
+.footer-links a{font-size:0.82rem;color:#fff;text-decoration:none;font-family:'TGS Perfect Condensed',sans-serif;letter-spacing:1px;transition:color 0.2s;}
+.footer-links a:hover{color:var(--red-btn);}
+
+/* ══════════════════════════════════════
+   HOME PAGE
+══════════════════════════════════════ */
+.hero-wrap{position:relative;min-height:100vh;display:grid;grid-template-columns:1fr 1fr;overflow:hidden;}
+#hero-canvas{position:absolute;inset:0;z-index:0;pointer-events:none;}
+.hero-left{position:relative;z-index:1;padding:4rem 1rem 4rem 5rem;display:flex;flex-direction:column;justify-content:center;}
+.hero-left::after{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,248,215,0.3) 1.5px,transparent 1.5px);background-size:28px 28px;pointer-events:none;z-index:-1;}
+.hero-eyebrow{opacity:0;animation:fadeUp 0.7s 0.1s forwards;}
+.hero-title{font-family:'TGS Perfect Condensed',sans-serif;font-size:clamp(5rem,9vw,12rem);line-height:0.85;letter-spacing:-3px;opacity:0;animation:fadeUp 0.7s 0.25s forwards;}
+.hero-title .stroke{-webkit-text-stroke:3px #fff;color:#000;}
+.hero-sub{font-family:'Slash Signature',cursive;font-style:normal;font-size:clamp(1.8rem,2.8vw,3rem);color:#ffa620;margin:0.8rem 0 1.4rem;opacity:0;animation:fadeUp 0.7s 0.4s forwards;line-height:1.1;}
+.hero-desc{font-size:0.97rem;color:var(--text);line-height:1.7;max-width:420px;margin-bottom:2.5rem;opacity:0;animation:fadeUp 0.7s 0.55s forwards;}
+.hero-btns{display:flex;gap:1rem;flex-wrap:wrap;opacity:0;animation:fadeUp 0.7s 0.7s forwards;}
+.hero-right{position:relative;z-index:1;display:flex;align-items:center;justify-content:center;padding:8rem 3rem 3rem 0.5rem;overflow:hidden;}
+.hero-char{width:min(480px,88%);filter:drop-shadow(0 20px 60px rgba(159,217,78,0.25));opacity:0;animation:charIn 1s 0.35s forwards;}
+.char-slideshow{display:grid;width:min(600px,95%);filter:drop-shadow(0 20px 60px rgba(159,217,78,0.25));opacity:0;animation:charIn 1s 0.35s forwards;}
+.char-slideshow .hero-char{grid-area:1/1;width:100%;height:auto;filter:none;animation:none;opacity:0;transition:opacity 0.8s ease;}
+.char-slideshow .hero-char.active{opacity:1;}
+.hero-char-wrap{position:relative;display:flex;align-items:center;justify-content:center;}
+.hero-char-wrap::before{content:'';position:absolute;width:340px;height:340px;border-radius:50%;background:radial-gradient(circle,rgba(159,217,78,0.12) 0%,transparent 70%);animation:pulse 4s ease-in-out infinite;}
+.hero-coin{position:absolute;bottom:2rem;right:1rem;width:90px;animation:coinFloat 3s ease-in-out infinite;}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:translateY(0);}}
+@keyframes charIn{from{opacity:0;transform:translateX(40px);}to{opacity:1;transform:translateX(0);}}
+@keyframes charFloat{0%,100%{transform:translateY(0);}50%{transform:translateY(-18px);}}
+@keyframes coinFloat{0%,100%{transform:translateY(0) rotate(0deg);}50%{transform:translateY(-12px) rotate(5deg);}}
+@keyframes pulse{0%,100%{transform:scale(1);opacity:0.6;}50%{transform:scale(1.15);opacity:1;}}
+@keyframes spin{from{transform:rotate(0deg);}to{transform:rotate(360deg);}}
+@keyframes glowPulse{0%,100%{box-shadow:0 0 20px rgba(159,217,78,0.2);}50%{box-shadow:0 0 40px rgba(159,217,78,0.5);}}
+
+/* STATS ROW */
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);background:var(--bg2);border-bottom:1px solid var(--border);}
+.stat-cell{padding:2.2rem 2rem;border-right:1px solid var(--border);transition:background 0.2s;}
+.stat-cell:last-child{border-right:none;}
+.stat-cell:hover{background:rgba(255,255,255,0.025);}
+.stat-num{font-family:'TGS Perfect Condensed',sans-serif;font-size:3rem;line-height:1;color:var(--green);letter-spacing:-1px;}
+.stat-lbl{font-size:0.72rem;letter-spacing:2px;color:rgba(255,255,255,0.35);margin-top:5px;text-transform:uppercase;}
+.stat-frac{font-size:0.55em;opacity:0.5;letter-spacing:0;}
+
+/* FEATURE SECTION */
+.feat-section{padding:5rem;background-color:var(--bg);background-image:radial-gradient(var(--dot-dark) 1.5px,transparent 1.5px);background-size:24px 24px;}
+.feat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1.2rem;margin-top:3rem;align-items:stretch;}
+.fc{padding:2.2rem;display:grid;grid-template-columns:1fr auto;grid-template-rows:auto 1fr;gap:1rem 1rem;align-items:start;align-content:start;border:2px solid var(--border);background:var(--fc-color,var(--red));color:#000;transition:all 0.3s;position:relative;overflow:hidden;cursor:default;}
+.fc:hover{transform:translateY(-6px);border-color:#fff;box-shadow:0 16px 36px var(--fc-shadow,rgba(214,60,42,0.1));}
+.fc-icon{font-size:2.4rem;margin-bottom:1rem;display:flex;align-items:center;}
+.fc-icon img{width:52px;height:52px;object-fit:contain;display:block;}
+.fc .fc-icon{width:57px;height:57px;flex-shrink:0;border-radius:50%;background:rgba(255,255,255,0.3);border:1px solid #000;justify-content:center;margin-bottom:0;overflow:hidden;grid-column:2;grid-row:1;align-self:start;}
+.fc .fc-icon img{width:100%;height:100%;object-fit:cover;}
+.fc .fc-icon img[src*="cardano-starburst"]{object-fit:contain;width:80%;height:80%;}
+.fc-title{font-family:'TGS Perfect Condensed',sans-serif;font-size:1.875rem;letter-spacing:2px;margin-bottom:0.5rem;text-transform:uppercase;}
+.fc .fc-title{margin-bottom:0;line-height:1.05;grid-column:1;grid-row:1;align-self:start;}
+.fc-desc{font-size:0.87rem;color:#000;line-height:1.6;}
+.fc .fc-desc{grid-column:1 / -1;grid-row:2;}
+
+/* SPLIT SECTION */
+.split-2{display:grid;grid-template-columns:1fr 1fr;}
+.sp-red{background:var(--red);padding:4.5rem;display:flex;flex-direction:column;justify-content:center;position:relative;overflow:hidden;}
+.sp-red .tag{background:rgba(255,255,255,0.2);border-color:rgba(255,255,255,0.4);color:#fff;}
+.sp-red .sec-title-sm{color:#fff;}
+.sp-red p{font-size:0.95rem;color:rgba(255,255,255,0.85);line-height:1.7;margin-bottom:2rem;}
+.sp-dark{background-color:var(--bg2);background-image:radial-gradient(var(--dot-dark) 1.5px,transparent 1.5px);background-size:24px 24px;padding:4.5rem;display:flex;flex-direction:column;justify-content:center;}
+.sp-dark .sec-title-sm{color:#fff;}
+.sp-dark p{font-size:0.95rem;color:var(--text);line-height:1.7;margin-bottom:2rem;}
+
+/* STEPS / HOW IT WORKS */
+.steps-sec{padding:5rem;background-color:var(--cream);background-image:radial-gradient(var(--dot-cream) 1.5px,transparent 1.5px);background-size:24px 24px;}
+.steps-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:1.5rem;margin-top:3rem;}
+.step{padding:2rem 1.5rem;background:#fff;border:2px solid rgba(0,0,0,0.07);text-align:center;transition:all 0.3s;}
+.step:hover{transform:translateY(-5px);border-color:#000;box-shadow:0 16px 36px rgba(0,0,0,0.1);}
+.step-num{font-family:'TGS Perfect Condensed',sans-serif;font-size:4.5rem;line-height:1;color:var(--red);display:block;margin-bottom:0.3rem;}
+.step-title{font-family:'TGS Perfect Condensed',sans-serif;font-size:1.1rem;letter-spacing:2px;color:#111;margin-bottom:0.5rem;}
+.step-desc{font-size:0.84rem;color:#666;line-height:1.5;}
+
+/* BIG CTA */
+.big-cta{background-color:var(--bg);background-image:radial-gradient(var(--dot-dark) 1.5px,transparent 1.5px);background-size:24px 24px;padding:6rem 5rem;text-align:center;border-top:1px solid var(--border);}
+.big-cta .sec-title{color:#fff;}
+.big-cta p{font-size:1rem;color:var(--text);max-width:520px;margin:0 auto 2.5rem;line-height:1.7;}
+.cta-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;}
+
+/* ══════════════════════════════════════
+   LORE & TOKENOMICS PAGE
+══════════════════════════════════════ */
+.lore-hero{display:grid;grid-template-columns:1fr 1fr;min-height:52vh;}
+.lore-tl{padding:8rem 4rem 4rem 5rem;display:flex;flex-direction:column;justify-content:center;}
+.lore-tl p{font-size:1rem;color:#555;line-height:1.8;margin-bottom:1.5rem;}
+.lore-tr{background:var(--red);padding:8rem 0 0;display:flex;align-items:stretch;justify-content:center;overflow:hidden;}
+.lore-tr img{width:100%;height:100%;object-fit:cover;display:block;}
+.lore-blocks{padding:4rem 5rem;background-color:var(--bg);background-image:radial-gradient(var(--dot-dark) 1.5px,transparent 1.5px);background-size:24px 24px;}
+.lb{padding:2.5rem 2.5rem 2.5rem 3.5rem;border-radius:12px;border:1px solid var(--border);background:rgba(255,255,255,0.02);margin-bottom:1.5rem;position:relative;transition:border-color 0.2s;}
+.lb::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;border-radius:4px 0 0 4px;background:var(--ac,var(--red));}
+.lb:hover{border-color:rgba(255,255,255,0.12);}
+.lb-label{font-family:'TGS Perfect Condensed',sans-serif;font-size:0.72rem;letter-spacing:4px;color:var(--green);margin-bottom:0.5rem;}
+.lb-title{font-family:'TGS Perfect Condensed',sans-serif;font-size:1.8rem;letter-spacing:1px;margin-bottom:0.8rem;}
+.lb-text{font-size:0.95rem;color:var(--text);line-height:1.8;}
+.token-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1rem;margin-top:1.5rem;}
+.tg-cell{padding:1.4rem;border-radius:10px;background:rgba(255,255,255,0.035);border:1px solid var(--border);text-align:center;transition:all 0.3s;}
+.tg-cell:hover{border-color:rgba(159,217,78,0.3);background:rgba(159,217,78,0.04);}
+.tg-num{font-family:'TGS Perfect Condensed',sans-serif;font-size:2rem;color:var(--green);}
+.tg-lbl{font-size:0.72rem;color:rgba(255,255,255,0.35);margin-top:4px;text-transform:uppercase;letter-spacing:1px;}
+
+/* TOKENOMICS DONUT */
+.token-visual{padding:4rem 5rem;background-color:var(--bg2);background-image:radial-gradient(var(--dot-dark) 1.5px,transparent 1.5px);background-size:24px 24px;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;}
+.donut-wrap{display:flex;align-items:center;justify-content:center;}
+.donut-svg{width:min(260px,100%);height:auto;}
+.donut-legend{display:flex;flex-direction:column;gap:1rem;}
+.dl-item{display:flex;align-items:center;gap:1rem;}
+.dl-dot{width:14px;height:14px;border-radius:50%;flex-shrink:0;}
+.dl-label{font-family:'TGS Perfect Condensed',sans-serif;font-size:1rem;letter-spacing:1px;}
+.dl-pct{font-size:0.8rem;color:var(--text);}
+
+/* ══════════════════════════════════════
+   MEMES PAGE
+══════════════════════════════════════ */
+.meme-head{padding:8rem 5rem 3rem;background-color:var(--bg);background-image:radial-gradient(var(--dot-dark) 1.5px,transparent 1.5px);background-size:24px 24px;}
+.meme-head-inner{display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:1.5rem;}
+.meme-count{font-size:0.85rem;color:var(--text);margin-top:0.5rem;}
+.meme-dl-bar{display:flex;align-items:center;gap:1rem;flex-wrap:wrap;}
+#dl-all-btn{display:inline-flex;align-items:center;gap:8px;font-family:'TGS Perfect Condensed',sans-serif;font-size:0.9rem;letter-spacing:2px;padding:11px 24px;background:var(--green);color:#000;border:1px solid #fff;border-radius:50px;cursor:pointer;transition:box-shadow 0.25s ease,padding 0.25s ease;}
+#dl-all-btn:hover{box-shadow:inset 0 -2px 0 0 #fff;padding:9px 24px 13px 24px;}
+#dl-all-btn:disabled{background:#3a4a28;color:#6a8a3a;cursor:not-allowed;transform:none;}
+.media-tabs{display:flex;gap:0.5rem;margin:1rem 0 0;}
+.tab-btn{background:transparent;color:var(--text);border:2px solid var(--border);border-radius:50px;padding:0.45rem 1.4rem;font-family:'TGS Perfect Condensed',sans-serif;font-size:0.85rem;letter-spacing:2px;cursor:pointer;transition:background 0.2s,color 0.2s,border-color 0.2s;}
+.tab-btn:hover{border-color:var(--red-btn);color:var(--red-btn);}
+.tab-btn.active{background:var(--red-btn);color:#fff;border-color:var(--red-btn);}
+#dl-progress{font-size:0.82rem;color:var(--text);display:none;}
+.progress-bar-wrap{width:180px;height:6px;background:rgba(255,255,255,0.08);border-radius:3px;overflow:hidden;display:none;}
+#progress-bar{height:100%;background:var(--green);width:0%;transition:width 0.2s;border-radius:3px;}
+.meme-grid{padding:1rem 4rem 5rem;background-color:var(--bg);background-image:radial-gradient(var(--dot-dark) 1.5px,transparent 1.5px);background-size:24px 24px;display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1rem;}
+.mc{border-radius:10px;overflow:hidden;border:2px solid var(--border);background:rgba(255,255,255,0.015);transition:all 0.3s;position:relative;aspect-ratio:1;cursor:pointer;}
+.mc:hover{border-color:var(--green);transform:scale(1.025);box-shadow:0 12px 32px rgba(0,0,0,0.4);}
+.mc:hover .mo{opacity:1;}
+.mc img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.3s;}
+.mc:hover img{transform:scale(1.07);}
+.mo{position:absolute;inset:0;background:rgba(0,0,0,0.82);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;opacity:0;transition:opacity 0.25s;}
+.mo-name{font-family:'TGS Perfect Condensed',sans-serif;font-size:1rem;letter-spacing:2px;color:rgba(255,255,255,0.8);}
+.dl-btn{font-family:'TGS Perfect Condensed',sans-serif;font-size:0.82rem;letter-spacing:2px;padding:8px 22px;background:var(--red-btn);color:#fff;border:1px solid #fff;border-radius:50px;cursor:pointer;transition:box-shadow 0.25s ease,padding 0.25s ease;}
+.dl-btn:hover{box-shadow:inset 0 -2px 0 0 #fff;padding:6px 22px 10px 22px;}
+
+/* ══════════════════════════════════════
+   MEME LIGHTBOX
+══════════════════════════════════════ */
+.lb-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.92);z-index:3000;display:none;align-items:center;justify-content:center;padding:1rem;-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);}
+.lb-overlay.open{display:flex;}
+.lb-box{position:relative;max-width:min(860px,96vw);width:100%;background:#111;border:1px solid rgba(255,255,255,0.1);border-radius:18px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 40px 80px rgba(0,0,0,0.8);}
+.lb-img-wrap{display:flex;align-items:center;justify-content:center;max-height:72vh;overflow:hidden;background:#000;}
+.lb-img-wrap img{max-width:100%;max-height:72vh;object-fit:contain;display:block;}
+.lb-close{position:absolute;top:12px;right:14px;width:38px;height:38px;border-radius:50%;background:rgba(0,0,0,0.75);border:1px solid #fff;color:#fff;font-size:1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.2s;z-index:1;line-height:1;}
+.lb-close:hover{background:rgba(224,69,53,0.7);}
+.lb-footer{padding:1.2rem 1.6rem 1.4rem;border-top:1px solid rgba(255,255,255,0.07);display:flex;align-items:center;gap:0.75rem;flex-wrap:wrap;}
+.lb-name{font-family:'TGS Perfect Condensed',sans-serif;font-size:1rem;letter-spacing:2px;color:rgba(255,255,255,0.35);flex:1;min-width:80px;}
+.lb-dl{font-family:'TGS Perfect Condensed',sans-serif;font-size:0.84rem;letter-spacing:2px;padding:10px 22px;background:rgba(255,255,255,0.07);color:#fff;border:1px solid #fff;border-radius:50px;cursor:pointer;text-decoration:none;transition:all 0.2s;display:inline-flex;align-items:center;gap:6px;}
+.lb-dl:hover{background:rgba(255,255,255,0.13);}
+.lb-share{font-family:'TGS Perfect Condensed',sans-serif;font-size:0.84rem;letter-spacing:2px;padding:10px 22px;background:#000;color:#fff;border:1px solid #fff;border-radius:50px;cursor:pointer;text-decoration:none;transition:all 0.2s;display:inline-flex;align-items:center;gap:8px;}
+.lb-share:hover{background:#1a1a1a;transform:translateY(-1px);}
+.lb-share-icon{font-weight:900;font-size:1rem;line-height:1;}
+@media(max-width:640px){
+  .lb-footer{gap:0.5rem;}
+  .lb-dl,.lb-share{font-size:0.78rem;padding:9px 16px;}
+}
+
+/* ══════════════════════════════════════
+   ABOUT PAGE
+══════════════════════════════════════ */
+.about-hero{display:grid;grid-template-columns:1fr 1fr;min-height:56vh;}
+.about-tl{padding:8rem 4rem 4rem 5rem;display:flex;flex-direction:column;justify-content:center;}
+.about-tl p{font-size:1rem;color:#555;line-height:1.8;margin-bottom:1.5rem;}
+.about-tr{background:#000;padding:8rem 0 0;display:flex;align-items:stretch;justify-content:center;overflow:hidden;}
+.about-tr img{width:100%;height:100%;object-fit:cover;display:block;filter:none;}
+.mission-sec{padding:5rem;background-color:var(--bg2);background-image:radial-gradient(var(--dot-dark) 1.5px,transparent 1.5px);background-size:24px 24px;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;}
+.mission-text p{font-size:1rem;color:var(--text);line-height:1.8;margin-bottom:1.2rem;}
+.values-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+.val-card{padding:1.5rem;border:2px solid var(--border);background:rgba(255,255,255,0.02);transition:all 0.3s;}
+.val-card:hover{border-color:var(--fc-color,var(--red));transform:translateY(-6px);box-shadow:0 16px 36px var(--fc-shadow,rgba(214,60,42,0.45));}
+.val-icon{font-size:1.8rem;margin-bottom:0.8rem;display:flex;align-items:center;}
+.val-icon img{width:48px;height:48px;object-fit:contain;display:block;}
+.val-title{font-family:'TGS Perfect Condensed',sans-serif;font-size:1.1rem;letter-spacing:2px;margin-bottom:0.3rem;}
+.val-desc{font-size:0.82rem;color:var(--text);line-height:1.5;}
+.team-sec{padding:5rem;background-color:var(--bg);background-image:radial-gradient(var(--dot-dark) 1.5px,transparent 1.5px);background-size:24px 24px;}
+.team-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1.2rem;margin-top:3rem;}
+.tc{padding:2rem 1.5rem;text-align:center;border:2px solid var(--border);background:rgba(255,255,255,0.02);transition:all 0.3s;position:relative;overflow:hidden;}
+.tc::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--tc-color,var(--red));}
+.tc:hover{border-color:var(--tc-color,var(--red));transform:translateY(-6px);box-shadow:0 16px 36px var(--tc-shadow,rgba(214,60,42,0.45));}
+.tc-red{--tc-color:var(--red);--tc-shadow:rgba(214,60,42,0.45);}
+.tc-green{--tc-color:var(--green);--tc-shadow:rgba(111,228,46,0.45);}
+.tc-cyan{--tc-color:var(--cyan);--tc-shadow:rgba(0,212,232,0.45);}
+.tc-gold{--tc-color:var(--gold);--tc-shadow:rgba(255,166,33,0.45);}
+.tc-av{width:80px;height:80px;border-radius:50%;margin:0 auto 1rem;overflow:hidden;border:2px solid var(--border);background:var(--bg3);display:flex;align-items:center;justify-content:center;font-size:1.8rem;}
+.tc-av img{width:100%;height:100%;object-fit:cover;display:block;}
+.tc-name{font-family:'TGS Perfect Condensed',sans-serif;font-size:1.1rem;letter-spacing:2px;}
+.tc-role{font-size:0.78rem;color:var(--text);margin-top:4px;}
+.tc-x{display:inline-flex;align-items:center;gap:5px;font-family:'TGS Perfect Condensed',sans-serif;font-size:0.8rem;letter-spacing:1px;color:rgba(255,255,255,0.3);text-decoration:none;margin-top:0.6rem;transition:color 0.2s;}
+.tc-x:hover{color:#fff;}
+
+/* ══════════════════════════════════════
+   PRODUCTS PAGE
+══════════════════════════════════════ */
+.prod-hero{padding:8rem 5rem 3rem;text-align:center;background-color:var(--bg);background-image:radial-gradient(var(--dot-dark) 1.5px,transparent 1.5px);background-size:24px 24px;}
+.prod-hero p{font-size:1rem;color:var(--text);max-width:540px;margin:0 auto;line-height:1.6;}
+.prod-grid{padding:2rem 4rem 5rem;background-color:var(--bg);background-image:radial-gradient(var(--dot-dark) 1.5px,transparent 1.5px);background-size:24px 24px;display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.5rem;}
+.pc{display:flex;flex-direction:column;border-radius:14px;border:2px solid var(--border);overflow:hidden;background:rgba(255,255,255,0.02);transition:all 0.3s;}
+.pc:hover{transform:translateY(-7px);}
+.pc.live:hover{border-color:var(--green);box-shadow:0 20px 50px rgba(159,217,78,0.08);}
+.pc.soon:hover{border-color:var(--cyan);box-shadow:0 20px 50px rgba(77,207,234,0.06);}
+.pc.road:hover{border-color:var(--purple);box-shadow:0 20px 50px rgba(139,63,200,0.06);}
+.pc-top{padding:2.5rem 2.2rem 1.8rem;border-bottom:1px solid var(--border);}
+.pc-icon{font-size:2.8rem;margin-bottom:0.8rem;display:block;}
+.pc-name{font-family:'TGS Perfect Condensed',sans-serif;font-size:1.7rem;letter-spacing:2px;}
+.pc-badge{display:inline-block;font-family:'TGS Perfect Condensed',sans-serif;font-size:0.68rem;letter-spacing:2px;padding:4px 10px;border-radius:4px;margin-top:7px;}
+.badge-live{background:rgba(159,217,78,0.12);color:var(--green);border:1px solid rgba(159,217,78,0.3);}
+.badge-soon{background:rgba(77,207,234,0.1);color:var(--cyan);border:1px solid rgba(77,207,234,0.25);}
+.badge-road{background:rgba(139,63,200,0.1);color:#b47aff;border:1px solid rgba(139,63,200,0.25);}
+.pc-body{flex:1;display:flex;flex-direction:column;justify-content:space-between;padding:1.5rem 2.2rem 2.2rem;}
+.pc-desc{font-size:0.88rem;color:var(--text);line-height:1.7;margin-bottom:1.5rem;}
+.pc-img{width:100%;height:64px;object-fit:contain;margin-bottom:1rem;filter:drop-shadow(0 4px 12px rgba(0,0,0,0.3));}
+
+/* PRODUCTS — FANGS THEME */
+.pc.pc-fangs{background:var(--pc-color,var(--green));border-color:transparent;border-radius:0;color:#000;}
+.pc.pc-fangs:hover{border-color:#fff;box-shadow:0 20px 50px var(--pc-shadow,rgba(111,228,46,0.35));}
+.pc.pc-fangs .pc-top{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;border-bottom:none;}
+.pc.pc-fangs .pc-name{color:#000;font-size:1.875rem;line-height:1.05;letter-spacing:2px;}
+.pc.pc-fangs .pc-badge{background:#000;color:var(--green);border-color:#000;}
+.pc.pc-fangs .pc-desc{color:#000;}
+.pc.pc-fangs .btn-ghost{border-color:#fff;color:#fff;background:#000;}
+.pc.pc-fangs .btn-ghost:hover{box-shadow:inset 0 -2px 0 0 #fff;padding:11px 36px 15px 36px;background:#000;}
+.pc-fangs-icon{width:57px;height:57px;flex-shrink:0;border-radius:50%;background:rgba(255,255,255,0.3);border:1px solid #000;overflow:hidden;display:flex;align-items:center;justify-content:center;}
+.pc-fangs-icon img{width:100%;height:100%;object-fit:cover;}
+.pc-green{--pc-color:#6fe42e;--pc-shadow:rgba(111,228,46,0.45);}
+.pc-magenta{--pc-color:#de5af2;--pc-shadow:rgba(222,90,242,0.45);}
+.pc-gold{--pc-color:#ffa621;--pc-shadow:rgba(255,166,33,0.45);}
+.pc-cyan{--pc-color:#00d4e8;--pc-shadow:rgba(0,212,232,0.45);}
+
+/* ══════════════════════════════════════
+   NFT PAGE
+══════════════════════════════════════ */
+.nft-hero{display:grid;grid-template-columns:1fr 1fr;min-height:52vh;}
+.nft-tl{padding:8rem 4rem 4rem 5rem;display:flex;flex-direction:column;justify-content:center;background-color:var(--cream);}
+.nft-tl p{font-size:1rem;color:#555;line-height:1.7;margin-bottom:2rem;}
+.nft-tr{background-color:var(--bg2);background-image:radial-gradient(var(--dot-dark) 1.5px,transparent 1.5px);background-size:24px 24px;padding:8rem 3rem 3rem;display:flex;flex-wrap:wrap;gap:0.8rem;align-items:center;justify-content:center;}
+.nft-thumb{width:calc(33% - 0.6rem);aspect-ratio:1;border-radius:10px;overflow:hidden;border:2px solid var(--border);transition:all 0.3s;background:var(--bg3);}
+.nft-thumb:hover{border-color:var(--gold);transform:scale(1.06);box-shadow:0 12px 30px rgba(255,166,33,0.2);}
+.nft-thumb img{width:100%;height:100%;object-fit:cover;}
+.nft-platforms{padding:4rem 5rem;background-color:var(--bg2);background-image:radial-gradient(var(--dot-dark) 1.5px,transparent 1.5px);background-size:24px 24px;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;}
+.plc{border:2px solid var(--border);padding:3rem 2.5rem;background:#000;text-align:center;transition:all 0.3s;position:relative;overflow:hidden;}
+.plc::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--fc-color,var(--gold));}
+.plc-gold{--fc-color:var(--gold);--fc-shadow:rgba(255,166,33,0.45);}
+.plc-green{--fc-color:var(--green);--fc-shadow:rgba(111,228,46,0.45);}
+.plc-cyan{--fc-color:var(--cyan);--fc-shadow:rgba(0,212,232,0.45);}
+.plc-red{--fc-color:var(--red);--fc-shadow:rgba(214,60,42,0.45);}
+.fc-red{--fc-color:#de5af2;--fc-shadow:rgba(222,90,242,0.45);}
+.fc-green{--fc-color:var(--green);--fc-shadow:rgba(111,228,46,0.45);}
+.fc-cyan{--fc-color:var(--cyan);--fc-shadow:rgba(0,212,232,0.45);}
+.fc-gold{--fc-color:var(--gold);--fc-shadow:rgba(255,166,33,0.45);}
+.lb-red{--ac:var(--red);}
+.lb-green{--ac:var(--green);}
+.lb-gold{--ac:var(--gold);}
+.dl-dot-green{background:var(--green);}
+.dl-dot-red{background:var(--red);}
+.dl-dot-gold{background:var(--gold);}
+.dl-dot-purple{background:var(--purple);}
+.token-note{font-size:0.82rem;color:var(--text);margin-top:1.5rem;line-height:1.6;}
+.lore-blocks-notop{padding-top:0;}
+.vc-red{--fc-color:var(--red);--fc-shadow:rgba(214,60,42,0.45);}
+.vc-green{--fc-color:var(--green);--fc-shadow:rgba(111,228,46,0.45);}
+.vc-gold{--fc-color:var(--gold);--fc-shadow:rgba(255,166,33,0.45);}
+.vc-purple{--fc-color:var(--purple);--fc-shadow:rgba(139,63,200,0.45);}
+.sec-sub-center{margin:0 auto;text-align:center;}
+.steps-sec .sec-title{color:var(--bg);}
+.steps-sec .sec-title span{color:var(--red);}
+.lore-tl .sec-title{color:var(--bg);}
+.lore-tl .sec-title span{color:var(--red);}
+.about-tl .sec-title{color:var(--bg);}
+.about-tl .sec-title span{color:var(--red);}
+.nft-tl .sec-title{color:var(--bg);}
+.nft-tl .sec-title span{color:var(--gold);}
+.plc:hover{transform:translateY(-6px);border-color:var(--fc-color,var(--gold));box-shadow:0 16px 36px var(--fc-shadow,rgba(255,166,33,0.45));}
+.plc-icon{font-size:3rem;margin-bottom:1rem;display:flex;align-items:center;justify-content:center;}
+.plc-icon img{width:64px;height:64px;object-fit:contain;display:block;}
+.plc-name{font-family:'TGS Perfect Condensed',sans-serif;font-size:2rem;letter-spacing:3px;margin-bottom:0.8rem;}
+.plc-desc{font-size:0.88rem;color:var(--text);line-height:1.6;margin-bottom:2rem;}
+.nft-showcase{padding:4rem 5rem;background-color:var(--bg);background-image:radial-gradient(var(--dot-dark) 1.5px,transparent 1.5px);background-size:24px 24px;}
+.nft-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1rem;margin-top:3rem;}
+.ng{border-radius:12px;overflow:hidden;border:2px solid var(--border);aspect-ratio:1;transition:all 0.3s;background:var(--bg2);position:relative;}
+.ng:hover{border-color:var(--gold);transform:translateY(-4px);box-shadow:0 16px 40px rgba(255,166,33,0.15);}
+.ng img{width:100%;height:100%;object-fit:cover;}
+.ng-placeholder{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:3rem;color:rgba(255,255,255,0.08);}
+.nft-marquee-wrap{overflow:hidden;width:100%;margin-top:3rem;padding:0.5rem 0;cursor:default;}
+.nft-marquee-track{display:flex;gap:1rem;width:max-content;animation:nftScroll 22s linear infinite;will-change:transform;}
+.nft-marquee-wrap:hover .nft-marquee-track{animation-play-state:paused;}
+.nft-marquee-item{width:240px;height:240px;flex-shrink:0;border-radius:12px;overflow:hidden;border:2px solid var(--border);transition:border-color 0.3s,transform 0.3s;}
+.nft-marquee-item:hover{border-color:var(--gold);transform:scale(1.04);}
+.nft-marquee-item img{width:100%;height:100%;object-fit:cover;}
+@keyframes nftScroll{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
+
+/* ══════════════════════════════════════
+   CONTACT PAGE
+══════════════════════════════════════ */
+.contact-wrap{display:grid;grid-template-columns:1fr 1fr;}
+.contact-tl{background-color:var(--cream);background-image:radial-gradient(var(--dot-cream) 1.5px,transparent 1.5px);background-size:24px 24px;padding:8rem 4rem 4rem 5rem;display:flex;flex-direction:column;justify-content:center;}
+.contact-tl .sec-title{color:var(--bg);}
+.contact-tl .sec-title .r{color:var(--red-btn);}
+.nft-cta{text-align:center;margin-top:3rem;}
+.contact-tl p{font-size:1rem;color:#555;line-height:1.7;margin-bottom:2rem;}
+.contact-char{width:min(200px,60%);filter:drop-shadow(0 10px 30px rgba(224,69,53,0.35));animation:charFloat 6s ease-in-out infinite;margin-top:2rem;}
+.contact-tr{background-color:var(--bg);background-image:radial-gradient(var(--dot-dark) 1.5px,transparent 1.5px);background-size:24px 24px;padding:3rem 3.5rem;display:flex;flex-direction:column;justify-content:center;gap:0.8rem;overflow:hidden;}
+.contact-links{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;margin-top:0.8rem;}
+.contact-fc{padding:1.6rem;border:2px solid var(--border);background:rgba(255,255,255,0.025);transition:all 0.3s;position:relative;overflow:hidden;text-decoration:none;color:#fff;display:block;}
+.contact-fc::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--fc-color,var(--red));}
+.contact-fc:hover{transform:translateY(-6px);border-color:var(--fc-color,var(--red));box-shadow:0 16px 36px var(--fc-shadow,rgba(214,60,42,0.45));}
+.contact-fc .fc-icon{font-size:2rem;margin-bottom:0.7rem;}
+.contact-fc .fc-title{font-family:'TGS Perfect Condensed',sans-serif;font-size:1.15rem;letter-spacing:2px;margin-bottom:0.3rem;}
+.contact-fc .fc-desc{font-size:0.82rem;color:var(--text);line-height:1.5;}
+.cfc-tw{--fc-color:#1DA1F2;--fc-shadow:rgba(29,161,242,0.45);}
+.cfc-dc{--fc-color:var(--green);--fc-shadow:rgba(111,228,46,0.45);}
+.cfc-vs{--fc-color:var(--gold);--fc-shadow:rgba(255,166,33,0.45);}
+.cfc-wu{--fc-color:var(--red);--fc-shadow:rgba(214,60,42,0.45);}
+#pg-contact .contact-wrap{flex:1;}
+.sl{display:flex;align-items:center;gap:1.5rem;padding:1.5rem 1.8rem;border-radius:12px;border:2px solid var(--border);text-decoration:none;color:#fff;background:rgba(255,255,255,0.015);transition:all 0.25s;}
+.sl:hover{transform:translateX(8px);}
+.sl.tw:hover{border-color:#1DA1F2;background:rgba(29,161,242,0.06);}
+.sl.dc:hover{border-color:#7289DA;background:rgba(114,137,218,0.06);}
+.sl.lt:hover{border-color:var(--green);background:rgba(159,217,78,0.05);}
+.sl.jp:hover{border-color:var(--gold);background:rgba(255,166,33,0.05);}
+.sl-icon{font-size:1.8rem;width:46px;text-align:center;flex-shrink:0;}
+.sl-name{font-family:'TGS Perfect Condensed',sans-serif;font-size:1.2rem;letter-spacing:2px;}
+.sl-handle{font-size:0.8rem;color:rgba(255,255,255,0.38);}
+.sl-arr{margin-left:auto;color:rgba(255,255,255,0.2);font-size:1.1rem;}
+
+/* ══════════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════════ */
+@media(max-width:1300px){
+  nav{padding:0 1rem;}
+  .nav-links a{font-size:1.15rem;letter-spacing:0.3px;padding:0 8px;}
+}
+@media(max-width:1050px){
+  .nav-links{display:none;}
+  .nav-cta{display:none;}
+  .hamburger{display:flex;}
+}
+@media(max-width:960px){
+  .hero-wrap,.lore-hero,.nft-hero,.about-hero,.contact-wrap,.split-2{grid-template-columns:1fr;}
+  .hero-right,.nft-tr{order:-1;padding:160px 2rem 3rem;}
+  .about-tr{order:-1;padding:160px 0 0;min-height:72vw;}
+  .hero-left,.lore-tl,.nft-tl,.about-tl{padding:3rem 2rem 2.5rem;}
+  .contact-tl{padding:160px 2rem 2.5rem;}
+  .lore-tr{order:-1;padding:160px 0 0;min-height:72vw;}
+  .contact-tr{padding:3rem 2rem;}
+  .sp-red,.sp-dark{padding:3rem 2rem;}
+  .stats-row{grid-template-columns:repeat(2,1fr);}
+  .feat-section,.lore-blocks,.steps-sec,.big-cta,.team-sec,.nft-showcase,.nft-platforms,.mission-sec{padding:3rem 2rem;}
+  .fc .fc-icon{width:48px;height:48px;}
+  .prod-hero{padding:160px 2rem 3rem;}
+  .token-visual{grid-template-columns:1fr;padding:3rem 2rem;gap:2rem;}
+  .mission-sec{grid-template-columns:1fr;}
+  .meme-head,.meme-grid{padding-left:1.5rem;padding-right:1.5rem;}
+  .prod-grid{padding:1.5rem 1.5rem 3rem;}
+  footer{padding:1.5rem 2rem;}
+}
+@media(max-width:640px){
+  .stats-row{grid-template-columns:1fr 1fr;}
+  .stat-cell{padding:1.4rem 1rem;}
+  .stat-num{font-size:2.2rem;}
+  .feat-section,.lore-blocks,.steps-sec,.big-cta,.team-sec,.nft-showcase{padding:2.5rem 1.2rem;}
+  .fc{padding:1.6rem;}
+  .fc .fc-icon{width:42px;height:42px;}
+  .fc-title,.fc .fc-title{font-size:1.5rem;}
+  .prod-hero{padding:160px 1.2rem 2.5rem;}
+  .meme-grid{grid-template-columns:repeat(auto-fill,minmax(140px,1fr));padding:1rem;}
+  .meme-head{padding:160px 1.2rem 1.5rem;}
+  .meme-head-inner{flex-direction:column;align-items:flex-start;}
+  .nft-thumb{width:calc(50% - 0.4rem);}
+  .nft-marquee-item{width:160px;height:160px;}
+  .contact-tl{padding:160px 1.5rem 2.5rem;}
+  .contact-tr{padding:2.5rem 1.5rem;}
+  .contact-links{grid-template-columns:1fr;}
+  footer{padding:1.2rem 1.5rem;flex-direction:column;align-items:flex-start;}
+  .hero-left{padding:2.5rem 1.5rem;}
+  .token-visual{padding:2.5rem 1.2rem;}
+  .mission-sec,.nft-platforms,.sp-red,.sp-dark{padding:2.5rem 1.2rem;}
+  .nft-showcase{padding:2.5rem 1.2rem;}
+  .prod-grid{padding:1rem 1.2rem 2.5rem;}
+}
+@media(max-width:480px){
+  .values-grid{grid-template-columns:1fr;}
+  .hero-btns{flex-direction:column;align-items:flex-start;}
+  .cta-btns{flex-direction:column;align-items:center;}
+  .hero-title{font-size:clamp(3.5rem,15vw,5rem);}
+  .sec-title{font-size:clamp(2.2rem,8vw,2.8rem);}
+  .step-num{font-size:3.2rem;}
+  .donut-wrap{padding:0 2rem;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#" onclick="goto('home');return false;">
+    <img src="assets/Viper_Head%20transparant.png" alt="ViperCoin" onerror="this.style.display='none'">
+    VIPER<span class="slash">COIN</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#" onclick="goto('home');return false;" id="nl-home" class="active">HOME</a></li>
+    <li><a href="#" onclick="goto('lore');return false;" id="nl-lore">LORE &amp; TOKENOMICS</a></li>
+    <li><a href="#" onclick="goto('products');return false;" id="nl-products">PRODUCTS &amp; SERVICES</a></li>
+    <li><a href="#" onclick="goto('nfts');return false;" id="nl-nfts">NFTS</a></li>
+    <li><a href="#" onclick="goto('memes');return false;" id="nl-memes">MEMES</a></li>
+    <li><a href="#" onclick="goto('about');return false;" id="nl-about">ABOUT US</a></li>
+    <li><a href="#" onclick="goto('contact');return false;" id="nl-contact">CONTACT</a></li>
+  </ul>
+  <div class="nav-right">
+    <a href="https://viperswap.io" target="_blank" rel="noopener noreferrer" class="nav-cta">BUY $VIPER</a>
+    <div class="hamburger" id="hbg" onclick="toggleMobile()">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mmenu">
+  <a href="#" onclick="goto('home');closeMobile();return false;">HOME</a>
+  <a href="#" onclick="goto('lore');closeMobile();return false;">LORE &amp; TOKENOMICS</a>
+  <a href="#" onclick="goto('products');closeMobile();return false;">PRODUCTS &amp; SERVICES</a>
+  <a href="#" onclick="goto('nfts');closeMobile();return false;">NFTS</a>
+  <a href="#" onclick="goto('memes');closeMobile();return false;">MEMES</a>
+  <a href="#" onclick="goto('about');closeMobile();return false;">ABOUT US</a>
+  <a href="#" onclick="goto('contact');closeMobile();return false;">CONTACT US</a>
+  <a href="https://viperswap.io" target="_blank" rel="noopener noreferrer" class="mob-cta" onclick="closeMobile()">BUY $VIPER</a>
+</div>
+
+<!-- MEME LIGHTBOX MODAL -->
+<div class="lb-overlay" id="lb-overlay" onclick="lbClickOutside(event)">
+  <div class="lb-box" id="lb-box">
+    <button type="button" class="lb-close" onclick="closeLB()" aria-label="Close">&#x2715;</button>
+    <div class="lb-img-wrap">
+      <img id="lb-img" src="" alt="Viper Meme">
+    </div>
+    <div class="lb-footer">
+      <span class="lb-name" id="lb-name">MEME #0000</span>
+      <a id="lb-dl-btn" href="#" class="lb-dl" download>&#x21E9; DOWNLOAD</a>
+      <button type="button" id="lb-share-btn" class="lb-share" onclick="shareOnX()">
+        <span class="lb-share-icon">&#x1D54F;</span> SHARE ON X
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════
+     HOME PAGE
+═══════════════════════════════════ -->
+<div id="pg-home" class="page active">
+  <div class="hero-wrap">
+    <canvas id="hero-canvas"></canvas>
+    <div class="hero-left">
+      <span class="tag tag-green hero-eyebrow">&#x25B2; POWERED BY CARDANO &#x25B2;</span>
+      <h1 class="hero-title">VIPER<br><span class="stroke">COIN</span></h1>
+      <div class="hero-sub">The Coin with Fangs</div>
+      <p class="hero-desc">The most venomous meme coin on Cardano. Community-driven, culture-fueled, and built to bite. Join the serpent revolution.</p>
+      <div class="hero-btns">
+        <a href="#" class="btn-red" onclick="goto('contact');return false;">&#x2192; JOIN COMMUNITY</a>
+        <a href="#" class="btn-ghost" onclick="goto('lore');return false;">LEARN MORE</a>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="hero-char-wrap">
+        <div class="char-slideshow" id="char-slideshow">
+          <img class="hero-char active" src="Images/Viper 04.png" alt="Viper Character">
+          <img class="hero-char" src="Images/Viper 02.png" alt="Viper Character">
+          <img class="hero-char" src="Images/Viper 08.png" alt="Viper Character">
+          <img class="hero-char" src="Images/Viper 05.png" alt="Viper Character">
+          <img class="hero-char" src="Images/Viper 01.png" alt="Viper Character">
+          <img class="hero-char" src="Images/Viper 03.png" alt="Viper Character">
+          <img class="hero-char" src="Images/Viper 09.png" alt="Viper Character">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MARQUEE -->
+  <div class="marquee-bar">
+    <div class="marquee-track">
+      <span class="marquee-item">VIPERCOIN</span><span class="marquee-item marquee-dot">&#x2022;</span>
+      <span class="marquee-item">THE COIN WITH FANGS</span><span class="marquee-item marquee-dot">&#x2022;</span>
+      <span class="marquee-item">POWERED BY CARDANO</span><span class="marquee-item marquee-dot">&#x2022;</span>
+      <span class="marquee-item">$VIPER</span><span class="marquee-item marquee-dot">&#x2022;</span>
+      <span class="marquee-item">BITE INTO DEFI</span><span class="marquee-item marquee-dot">&#x2022;</span>
+      <span class="marquee-item">COMMUNITY DRIVEN</span><span class="marquee-item marquee-dot">&#x2022;</span>
+      <span class="marquee-item">VIPERCOIN</span><span class="marquee-item marquee-dot">&#x2022;</span>
+      <span class="marquee-item">THE COIN WITH FANGS</span><span class="marquee-item marquee-dot">&#x2022;</span>
+      <span class="marquee-item">POWERED BY CARDANO</span><span class="marquee-item marquee-dot">&#x2022;</span>
+      <span class="marquee-item">$VIPER</span><span class="marquee-item marquee-dot">&#x2022;</span>
+      <span class="marquee-item">BITE INTO DEFI</span><span class="marquee-item marquee-dot">&#x2022;</span>
+      <span class="marquee-item">COMMUNITY DRIVEN</span><span class="marquee-item marquee-dot">&#x2022;</span>
+    </div>
+  </div>
+
+  <!-- STATS -->
+  <div class="stats-row">
+    <div class="stat-cell reveal"><div class="stat-num" id="js-meme-stat" data-count="562">0</div><div class="stat-lbl">Memes Created</div></div>
+    <div class="stat-cell reveal delay-1"><div class="stat-num" data-count="1540">0</div><div class="stat-lbl">Holders Strong</div></div>
+    <div class="stat-cell reveal delay-2"><div class="stat-num">3,174<span class="stat-frac">/4,999</span></div><div class="stat-lbl">NFTs Minted</div></div>
+    <div class="stat-cell reveal delay-3"><div class="stat-num" data-count="1">0</div><div class="stat-lbl">Cardano Chain</div></div>
+  </div>
+
+  <div class="color-stripe"><div class="cs-red"></div><div class="cs-orange"></div><div class="cs-gold"></div><div class="cs-green"></div><div class="cs-cyan"></div><div class="cs-purple"></div><div class="cs-pink"></div></div>
+
+  <!-- FEATURES -->
+  <div class="feat-section">
+    <div class="reveal"><span class="tag">WHY VIPER?</span></div>
+    <h2 class="sec-title reveal delay-1">THE <span class="g">FANGS</span><br>OF CARDANO</h2>
+    <div class="feat-grid">
+      <div class="fc fc-red reveal">
+        <div class="fc-icon"><img src="Images/11a.png" alt="Community Driven"></div>
+        <div class="fc-title">Community<br>Driven</div>
+        <div class="fc-desc">Born from the streets of crypto culture. Every holder is a Viper. Every meme is a battle cry. We move as one serpent.</div>
+      </div>
+      <div class="fc fc-green reveal delay-1">
+        <div class="fc-icon"><img src="Images/cardano-starburst-black.svg" alt="Cardano Powered"></div>
+        <div class="fc-title">Cardano<br>Powered</div>
+        <div class="fc-desc">Built on Cardano — fast, secure, and sustainable. Low fees. High speed. The perfect chain for the serpent economy.</div>
+      </div>
+      <div class="fc fc-cyan reveal delay-2">
+        <div class="fc-icon"><img src="Images/10a.png" alt="Meme Culture"></div>
+        <div class="fc-title">Meme<br>Culture</div>
+        <div class="fc-desc">Over <span class="js-meme-count">562</span> memes and growing. Our community creates, shares, and laughs together. Culture is the foundation of every great coin.</div>
+      </div>
+      <div class="fc fc-gold reveal delay-3">
+        <div class="fc-icon"><img src="Images/NFT Energy Design Concept.png" alt="Utility &amp; NFTs"></div>
+        <div class="fc-title">Utility<br>&amp; NFTs</div>
+        <div class="fc-desc">Beyond the meme — ViperCoin has real utility with ViperSwap DEX integration and an exclusive NFT collection on WayUp.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SPLIT: HOW TO GET VIPER -->
+  <div class="split-2">
+    <div class="sp-red">
+      <span class="tag">GET STARTED</span>
+      <h3 class="sec-title-sm">HOW TO GET<br>$VIPER</h3>
+      <p>Getting your fangs on $VIPER is simple. Set up a Cardano-compatible wallet, acquire some ADA, and swap on ViperSwap or any Cardano DEX that lists $VIPER.</p>
+      <a href="https://viperswap.io" target="_blank" rel="noopener noreferrer" class="btn-ghost">GO TO VIPERSWAP &#x2197;</a>
+    </div>
+    <div class="sp-dark">
+      <span class="tag tag-green">ECOSYSTEM</span>
+      <h3 class="sec-title-sm">THE VIPER<br>ECOSYSTEM</h3>
+      <p>ViperCoin is more than a token. It's a growing ecosystem with ViperSwap for decentralized trading, Viper NFTs for collectors, and a community that never sleeps.</p>
+      <a href="#" class="btn-red" onclick="goto('products');return false;">VIEW PRODUCTS</a>
+    </div>
+  </div>
+
+  <!-- HOW IT WORKS -->
+  <div class="steps-sec">
+    <span class="tag tag-cream reveal">GET STARTED IN MINUTES</span>
+    <h2 class="sec-title reveal delay-1">HOW IT <span>WORKS</span></h2>
+    <div class="steps-grid">
+      <div class="step reveal">
+        <span class="step-num">01</span>
+        <div class="step-title">GET A WALLET</div>
+        <div class="step-desc">Download Eternl, Lace, Vespr, or any Cardano-compatible wallet. Set it up and secure your seed phrase.</div>
+      </div>
+      <div class="step reveal delay-1">
+        <span class="step-num">02</span>
+        <div class="step-title">BUY ADA</div>
+        <div class="step-desc">Purchase ADA from ViperSwap.io — We provide Fiat On/Offramp options.</div>
+      </div>
+      <div class="step reveal delay-2">
+        <span class="step-num">03</span>
+        <div class="step-title">SWAP ON DEX</div>
+        <div class="step-desc">On ViperSwap DEX. Swap your ADA for $VIPER tokens in seconds.</div>
+      </div>
+      <div class="step reveal delay-3">
+        <span class="step-num">04</span>
+        <div class="step-title">JOIN THE FANG</div>
+        <div class="step-desc">Welcome to the serpent family. Join our Discord, share memes, and be part of the Viper revolution.</div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-logo">
+      <img src="assets/Viper_Head%20transparant.png" alt="ViperCoin" onerror="this.style.display='none'">
+      VIPER<span class="slash">COIN</span>
+    </div>
+    <p>&copy; 2026 VIPERCOIN. The Coin with Fangs. Powered by Cardano.</p>
+    <div class="footer-links">
+      <a href="https://x.com/vipercoin_ada" target="_blank" rel="noopener noreferrer">X / TWITTER</a>
+      <a href="https://discord.gg/vipercoin" target="_blank" rel="noopener noreferrer">DISCORD</a>
+      <a href="https://viperswap.io" target="_blank" rel="noopener noreferrer">VIPERSWAP</a>
+      <a href="https://linktr.ee/vipercoin_ada" target="_blank" rel="noopener noreferrer">LINKTREE</a>
+    </div>
+  </footer>
+</div>
+
+<!-- ═══════════════════════════════════
+     LORE & TOKENOMICS PAGE
+═══════════════════════════════════ -->
+<div id="pg-lore" class="page">
+  <div class="lore-hero dots-cream">
+    <div class="lore-tl">
+      <span class="tag tag-cream">THE STORY</span>
+      <h1 class="sec-title">THE LORE OF<br><span>VIPER</span>COIN</h1>
+      <p>Deep in the Cardano blockchain, a serpent stirs. VIPERCOIN was forged in the fires of community passion, meme culture, and a relentless desire to bite back against the mediocre.</p>
+      <p>More lore and the full story coming soon...</p>
+    </div>
+    <div class="lore-tr">
+      <img src="Images/Viper_GIF_0020.gif" alt="Viper" onerror="this.style.display='none'">
+    </div>
+  </div>
+
+  <div class="color-stripe"><div class="cs-red"></div><div class="cs-orange"></div><div class="cs-gold"></div><div class="cs-green"></div><div class="cs-cyan"></div><div class="cs-purple"></div><div class="cs-pink"></div></div>
+
+  <div class="lore-blocks">
+    <span class="tag reveal">LORE — CHAPTER ONE</span>
+    <h2 class="sec-title reveal delay-1">THE ORIGIN<br><span class="g">STORY</span></h2>
+    <div class="lb lb-red reveal">
+      <div class="lb-label">GENESIS</div>
+      <div class="lb-title">THE SERPENT AWAKENS</div>
+      <div class="lb-text">Content coming soon. The full origin story of ViperCoin — how the serpent was born on Cardano, who forged it, and why it was destined to strike fear into the mundane world of crypto...</div>
+    </div>
+    <div class="lb lb-green reveal">
+      <div class="lb-label">CHAPTER II</div>
+      <div class="lb-title">THE FANG ASSEMBLY</div>
+      <div class="lb-text">Content coming soon. The gathering of the first Vipers — a ragtag squad of Cardano degens who saw the vision and never looked back...</div>
+    </div>
+    <div class="lb lb-gold reveal">
+      <div class="lb-label">CHAPTER III</div>
+      <div class="lb-title">THE MEME WARS</div>
+      <div class="lb-text">Content coming soon. How ViperCoin's meme culture became the most potent weapon in the Cardano ecosystem...</div>
+    </div>
+  </div>
+
+  <div class="token-visual">
+    <div class="donut-wrap reveal-left">
+      <svg class="donut-svg" viewBox="0 0 120 120">
+        <circle cx="60" cy="60" r="50" fill="none" stroke="var(--bg3)" stroke-width="18"/>
+        <circle cx="60" cy="60" r="50" fill="none" stroke="var(--green)" stroke-width="18"
+          stroke-dasharray="188.5 314.2" stroke-dashoffset="78.5" transform="rotate(-90 60 60)"/>
+        <circle cx="60" cy="60" r="50" fill="none" stroke="var(--red)" stroke-width="18"
+          stroke-dasharray="78.5 314.2" stroke-dashoffset="-110" transform="rotate(-90 60 60)"/>
+        <circle cx="60" cy="60" r="50" fill="none" stroke="var(--gold)" stroke-width="18"
+          stroke-dasharray="47.1 314.2" stroke-dashoffset="-188.5" transform="rotate(-90 60 60)"/>
+        <circle cx="60" cy="60" r="50" fill="none" stroke="var(--purple)" stroke-width="18"
+          stroke-dasharray="31.4 314.2" stroke-dashoffset="-235.6" transform="rotate(-90 60 60)"/>
+        <text x="60" y="56" text-anchor="middle" fill="#fff" font-family="TGS Perfect Condensed" font-size="14" letter-spacing="1">TOKEN</text>
+        <text x="60" y="70" text-anchor="middle" fill="rgba(255,255,255,0.45)" font-family="TGS Perfect Condensed" font-size="9">DISTRIBUTION</text>
+      </svg>
+    </div>
+    <div class="reveal-right">
+      <span class="tag tag-green">TOKENOMICS</span>
+      <h2 class="sec-title-sm">TOKEN<br>DISTRIBUTION</h2>
+      <div class="donut-legend">
+        <div class="dl-item"><div class="dl-dot dl-dot-green"></div><div><div class="dl-label">COMMUNITY &amp; ECOSYSTEM</div><div class="dl-pct">60% — TBD</div></div></div>
+        <div class="dl-item"><div class="dl-dot dl-dot-red"></div><div><div class="dl-label">LIQUIDITY POOL</div><div class="dl-pct">25% — TBD</div></div></div>
+        <div class="dl-item"><div class="dl-dot dl-dot-gold"></div><div><div class="dl-label">DEVELOPMENT</div><div class="dl-pct">10% — TBD</div></div></div>
+        <div class="dl-item"><div class="dl-dot dl-dot-purple"></div><div><div class="dl-label">MARKETING</div><div class="dl-pct">5% — TBD</div></div></div>
+      </div>
+      <p class="token-note">Full tokenomics details coming soon. Numbers to be confirmed with official documentation.</p>
+    </div>
+  </div>
+
+  <div class="lore-blocks lore-blocks-notop">
+    <span class="tag tag-gold reveal">TOKEN STATS</span>
+    <h2 class="sec-title reveal delay-1">BY THE <span class="gold">NUMBERS</span></h2>
+    <div class="token-grid">
+      <div class="tg-cell reveal"><div class="tg-num">TBD</div><div class="tg-lbl">Total Supply</div></div>
+      <div class="tg-cell reveal delay-1"><div class="tg-num">0%</div><div class="tg-lbl">Tax</div></div>
+      <div class="tg-cell reveal delay-2"><div class="tg-num">ADA</div><div class="tg-lbl">Network</div></div>
+      <div class="tg-cell reveal delay-3"><div class="tg-num">5K+</div><div class="tg-lbl">Holders</div></div>
+      <div class="tg-cell reveal"><div class="tg-num">LP</div><div class="tg-lbl">Locked Liquidity</div></div>
+      <div class="tg-cell reveal delay-1"><div class="tg-num">DEX</div><div class="tg-lbl">Trading Venue</div></div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-logo"><img src="assets/Viper_Head%20transparant.png" alt="ViperCoin" onerror="this.style.display='none'"> VIPER<span class="slash">COIN</span></div>
+    <p>&copy; 2026 VIPERCOIN. The Coin with Fangs. Powered by Cardano.</p>
+    <div class="footer-links">
+      <a href="https://x.com/vipercoin_ada" target="_blank" rel="noopener noreferrer">X / TWITTER</a>
+      <a href="https://discord.gg/vipercoin" target="_blank" rel="noopener noreferrer">DISCORD</a>
+      <a href="https://viperswap.io" target="_blank" rel="noopener noreferrer">VIPERSWAP</a>
+      <a href="https://linktr.ee/vipercoin_ada" target="_blank" rel="noopener noreferrer">LINKTREE</a>
+    </div>
+  </footer>
+</div>
+
+<!-- ═══════════════════════════════════
+     MEMES PAGE
+═══════════════════════════════════ -->
+<div id="pg-memes" class="page">
+  <div class="meme-head">
+    <div class="meme-head-inner">
+      <div>
+        <span class="tag">MEME VAULT</span>
+        <h1 class="sec-title">THE VIPER<br><span class="g">MEME GALLERY</span></h1>
+        <p class="meme-count"><span class="js-meme-count" id="meme-page-num">562</span> <span id="meme-page-label">memes</span> &amp; counting — download, share, spread the venom</p>
+        <div class="media-tabs">
+          <button type="button" class="tab-btn active" data-tab="memes" onclick="switchTab('memes')">MEMES</button>
+          <button type="button" class="tab-btn" data-tab="gifs" onclick="switchTab('gifs')">GIFs</button>
+          <button type="button" class="tab-btn" data-tab="stickers" onclick="switchTab('stickers')">STICKERS</button>
+        </div>
+      </div>
+      <div class="meme-dl-bar">
+        <div>
+          <div class="progress-bar-wrap" id="progress-wrap"><div id="progress-bar"></div></div>
+          <span id="dl-progress">Preparing zip...</span>
+        </div>
+        <button type="button" id="dl-all-btn" onclick="downloadAll()">&#x21E9; DOWNLOAD ALL (ZIP)</button>
+      </div>
+    </div>
+  </div>
+  <div class="meme-grid" id="meme-grid"></div>
+  <footer>
+    <div class="footer-logo"><img src="assets/Viper_Head%20transparant.png" alt="ViperCoin" onerror="this.style.display='none'"> VIPER<span class="slash">COIN</span></div>
+    <p>&copy; 2026 VIPERCOIN. The Coin with Fangs. Powered by Cardano.</p>
+    <div class="footer-links">
+      <a href="https://x.com/vipercoin_ada" target="_blank" rel="noopener noreferrer">X / TWITTER</a>
+      <a href="https://discord.gg/vipercoin" target="_blank" rel="noopener noreferrer">DISCORD</a>
+      <a href="https://viperswap.io" target="_blank" rel="noopener noreferrer">VIPERSWAP</a>
+      <a href="https://linktr.ee/vipercoin_ada" target="_blank" rel="noopener noreferrer">LINKTREE</a>
+    </div>
+  </footer>
+</div>
+
+<!-- ═══════════════════════════════════
+     ABOUT PAGE
+═══════════════════════════════════ -->
+<div id="pg-about" class="page">
+  <div class="about-hero dots-cream">
+    <div class="about-tl">
+      <span class="tag tag-cream">WHO WE ARE</span>
+      <h1 class="sec-title">ABOUT<br><span>VIPER</span>COIN</h1>
+      <p>ViperCoin is a community-driven meme coin built on the Cardano blockchain. Born from passion, sustained by culture, and fueled by a community that refuses to sleep.</p>
+      <p>We are the serpents of Cardano — unpredictable, resilient, and always ready to strike.</p>
+    </div>
+    <div class="about-tr">
+      <img src="Images/Viper_IDK.gif" alt="Viper" onerror="this.style.display='none'">
+    </div>
+  </div>
+
+  <div class="color-stripe"><div class="cs-red"></div><div class="cs-orange"></div><div class="cs-gold"></div><div class="cs-green"></div><div class="cs-cyan"></div><div class="cs-purple"></div><div class="cs-pink"></div></div>
+
+  <div class="mission-sec">
+    <div class="mission-text reveal-left">
+      <span class="tag">OUR MISSION</span>
+      <h2 class="sec-title-sm">BITE BACK.<br>BUILD FORWARD.</h2>
+      <p>ViperCoin was created to prove that meme coins can have substance. We're not just a joke — we're a movement. Every meme shared, every holder gained, and every trade made is a step toward building something that endures.</p>
+      <p>Our mission is to build the most culture-rich, community-led token on Cardano — combining memes, NFTs, DeFi, and storytelling into one venomous package.</p>
+    </div>
+    <div class="values-grid reveal-right">
+      <div class="val-card vc-red"><div class="val-icon"><img src="Images/2b.png" alt="Community First"></div><div class="val-title">COMMUNITY FIRST</div><div class="val-desc">Every decision is made for and by the community. No VC dumps. No insider games.</div></div>
+      <div class="val-card vc-green"><div class="val-icon"><img src="Images/5b.png" alt="Transparency"></div><div class="val-title">TRANSPARENCY</div><div class="val-desc">Open communication. Public wallets. No hidden agendas. What you see is what you get.</div></div>
+      <div class="val-card vc-gold"><div class="val-icon"><img src="Images/12.png" alt="Culture &amp; Memes"></div><div class="val-title">CULTURE &amp; MEMES</div><div class="val-desc">Culture is our currency. The best memes spread. The best communities last.</div></div>
+      <div class="val-card vc-purple"><div class="val-icon"><img src="Images/VIPERSWAP.png" alt="Real Utility"></div><div class="val-title">REAL UTILITY</div><div class="val-desc">ViperSwap DEX, NFT collections, and an expanding ecosystem built for Cardano.</div></div>
+    </div>
+  </div>
+
+  <div class="team-sec">
+    <span class="tag reveal">THE TEAM</span>
+    <h2 class="sec-title reveal delay-1">MEET THE <span class="r">VIPERS</span></h2>
+    <div class="team-grid">
+      <div class="tc tc-red reveal">
+        <div class="tc-av"><img src="Images/Jinx.png" alt="Jinx"></div>
+        <div class="tc-name">JINX</div>
+        <div class="tc-role">Community Member</div>
+        <a href="https://x.com/_Just_Jinx" target="_blank" rel="noopener noreferrer" class="tc-x">&#x1D54F; @_Just_Jinx</a>
+      </div>
+      <div class="tc tc-green reveal delay-1">
+        <div class="tc-av"><img src="Images/Madmusicmaker.png" alt="Madmusicmaker"></div>
+        <div class="tc-name">MADMUSICMAKER</div>
+        <div class="tc-role">Community Member</div>
+        <a href="https://x.com/AMadMusicMaker" target="_blank" rel="noopener noreferrer" class="tc-x">&#x1D54F; @AMadMusicMaker</a>
+      </div>
+      <div class="tc tc-cyan reveal delay-2">
+        <div class="tc-av"><img src="Images/MikeyExile.png" alt="MikeyExile"></div>
+        <div class="tc-name">MIKEYEXILE</div>
+        <div class="tc-role">Community Member</div>
+        <a href="https://x.com/Birfmas132355" target="_blank" rel="noopener noreferrer" class="tc-x">&#x1D54F; @Birfmas132355</a>
+      </div>
+      <div class="tc tc-gold reveal delay-3">
+        <div class="tc-av"><img src="Images/Snekable.png" alt="Snekable"></div>
+        <div class="tc-name">SNEKABLE</div>
+        <div class="tc-role">Community Member</div>
+        <a href="https://x.com/snekable" target="_blank" rel="noopener noreferrer" class="tc-x">&#x1D54F; @snekable</a>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-logo"><img src="assets/Viper_Head%20transparant.png" alt="ViperCoin" onerror="this.style.display='none'"> VIPER<span class="slash">COIN</span></div>
+    <p>&copy; 2026 VIPERCOIN. The Coin with Fangs. Powered by Cardano.</p>
+    <div class="footer-links">
+      <a href="https://x.com/vipercoin_ada" target="_blank" rel="noopener noreferrer">X / TWITTER</a>
+      <a href="https://discord.gg/vipercoin" target="_blank" rel="noopener noreferrer">DISCORD</a>
+      <a href="https://viperswap.io" target="_blank" rel="noopener noreferrer">VIPERSWAP</a>
+      <a href="https://linktr.ee/vipercoin_ada" target="_blank" rel="noopener noreferrer">LINKTREE</a>
+    </div>
+  </footer>
+</div>
+
+<!-- ═══════════════════════════════════
+     PRODUCTS PAGE
+═══════════════════════════════════ -->
+<div id="pg-products" class="page">
+  <div class="prod-hero">
+    <span class="tag reveal">ECOSYSTEM</span>
+    <h1 class="sec-title reveal delay-1">PRODUCTS &amp;<br><span class="g">SERVICES</span></h1>
+    <p class="sec-sub sec-sub-center reveal delay-2">The ViperCoin ecosystem is growing. Here's what we're building for the Cardano community.</p>
+  </div>
+
+  <div class="color-stripe"><div class="cs-red"></div><div class="cs-orange"></div><div class="cs-gold"></div><div class="cs-green"></div><div class="cs-cyan"></div><div class="cs-purple"></div><div class="cs-pink"></div></div>
+
+  <div class="prod-grid">
+
+    <div class="pc live reveal pc-fangs pc-green">
+      <div class="pc-top">
+        <div>
+          <div class="pc-name">VIPERSWAP</div>
+          <span class="pc-badge">&#x25CF; LIVE</span>
+        </div>
+        <div class="pc-fangs-icon">
+          <img src="assets/viperswap.png" alt="ViperSwap" onerror="this.style.display='none'">
+        </div>
+      </div>
+      <div class="pc-body">
+        <p class="pc-desc">The premier decentralized exchange for the ViperCoin ecosystem. Swap assets on Cardano with lightning speed and minimal fees. Also supports cross-chain swapping functionality.</p>
+        <a href="https://viperswap.io" target="_blank" rel="noopener noreferrer" class="btn-ghost">LAUNCH APP &#x2197;</a>
+      </div>
+    </div>
+
+    <div class="pc live reveal delay-1 pc-fangs pc-magenta">
+      <div class="pc-top">
+        <div>
+          <div class="pc-name">MEME VAULT</div>
+          <span class="pc-badge">&#x25CF; LIVE</span>
+        </div>
+        <div class="pc-fangs-icon">
+          <img src="Images/2b.png" alt="Meme Vault" onerror="this.style.display='none'">
+        </div>
+      </div>
+      <div class="pc-body">
+        <p class="pc-desc"><span class="js-meme-count">562</span>+ community-created memes available to download, share, and spread across the internet. The most prolific meme treasury on Cardano. Regularly updated.</p>
+        <a href="#" class="btn-ghost" onclick="goto('memes');return false;">VIEW MEMES &#x2197;</a>
+      </div>
+    </div>
+
+    <div class="pc live reveal delay-2 pc-fangs pc-gold">
+      <div class="pc-top">
+        <div>
+          <div class="pc-name">VIPER NFTS</div>
+          <span class="pc-badge">&#x25CF; LIVE</span>
+        </div>
+        <div class="pc-fangs-icon">
+          <img src="Images/NFT Energy Design Concept.png" alt="Viper NFTs" onerror="this.style.display='none'">
+        </div>
+      </div>
+      <div class="pc-body">
+        <p class="pc-desc">Exclusive hand-crafted ViperCoin NFT collection available on WayUp. Own a piece of the serpent lore. Rare, unique, and dripping with venom.</p>
+        <a href="https://www.wayup.io/collection/45851dd847cf1e49b795f3c6c998e1eb18b9d30afa71e4ce8bff4183" target="_blank" rel="noopener noreferrer" class="btn-ghost">VIEW COLLECTION &#x2197;</a>
+      </div>
+    </div>
+
+    <div class="pc live reveal delay-3 pc-fangs pc-cyan">
+      <div class="pc-top">
+        <div>
+          <div class="pc-name">WADE<br>STAKE POOL</div>
+          <span class="pc-badge">&#x25CF; LIVE</span>
+        </div>
+        <div class="pc-fangs-icon">
+          <img src="assets/Viper_Head%20transparant.png" alt="WADE Stake Pool">
+        </div>
+      </div>
+      <div class="pc-body">
+        <p class="pc-desc">Stake your ADA with the WADE pool and earn rewards while directly supporting the ViperCoin ecosystem. Every delegation strengthens the serpent. Your stake, our venom.</p>
+        <a href="https://pool.pm/c2ebd43e5e8ecc22562aa09ce35d107677f46f216cc069693ecb4551" target="_blank" rel="noopener noreferrer" class="btn-ghost">STAKE NOW &#x2197;</a>
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    <div class="footer-logo"><img src="assets/Viper_Head%20transparant.png" alt="ViperCoin" onerror="this.style.display='none'"> VIPER<span class="slash">COIN</span></div>
+    <p>&copy; 2026 VIPERCOIN. The Coin with Fangs. Powered by Cardano.</p>
+    <div class="footer-links">
+      <a href="https://x.com/vipercoin_ada" target="_blank" rel="noopener noreferrer">X / TWITTER</a>
+      <a href="https://discord.gg/vipercoin" target="_blank" rel="noopener noreferrer">DISCORD</a>
+      <a href="https://viperswap.io" target="_blank" rel="noopener noreferrer">VIPERSWAP</a>
+      <a href="https://linktr.ee/vipercoin_ada" target="_blank" rel="noopener noreferrer">LINKTREE</a>
+    </div>
+  </footer>
+</div>
+
+<!-- ═══════════════════════════════════
+     NFTS PAGE
+═══════════════════════════════════ -->
+<div id="pg-nfts" class="page">
+  <div class="nft-hero">
+    <div class="nft-tl dots-cream">
+      <span class="tag tag-cream">DIGITAL COLLECTIBLES</span>
+      <h1 class="sec-title">VIPER<br><span>NFT</span><br>COLLECTION</h1>
+      <p>Exclusive ViperCoin NFTs — hand-crafted digital collectibles for true serpents. Each NFT is unique, rare, and part of the ViperCoin lore.</p>
+      <a href="https://www.wayup.io/collection/45851dd847cf1e49b795f3c6c998e1eb18b9d30afa71e4ce8bff4183" target="_blank" rel="noopener noreferrer" class="btn-gold">VIEW ON WAYUP &#x2197;</a>
+    </div>
+    <div class="nft-tr">
+      <div class="nft-thumb"><img src="Images/Biohazard Fang.jpg" alt="Biohazard Fang"></div>
+      <div class="nft-thumb"><img src="Images/Infernal Mage.png" alt="Infernal Mage"></div>
+      <div class="nft-thumb"><img src="Images/Ruby Sage.png" alt="Ruby Sage"></div>
+      <div class="nft-thumb"><img src="Images/Necro Bone Revenant.jpg" alt="Necro Bone Revenant"></div>
+      <div class="nft-thumb"><img src="Images/The Scorched Oracle.jpg" alt="The Scorched Oracle"></div>
+      <div class="nft-thumb"><img src="Images/Viperine.png" alt="Viperine"></div>
+    </div>
+  </div>
+
+  <div class="color-stripe"><div class="cs-red"></div><div class="cs-orange"></div><div class="cs-gold"></div><div class="cs-green"></div><div class="cs-cyan"></div><div class="cs-purple"></div><div class="cs-pink"></div></div>
+
+  <div class="nft-platforms">
+    <div class="plc plc-gold reveal">
+      <div class="plc-icon"><img src="Images/WayUp Logo.jpg" alt="WayUp"></div>
+      <div class="plc-name">WAYUP</div>
+      <div class="plc-desc">The primary marketplace for ViperCoin NFTs on Cardano. Browse the full collection, place bids, and acquire your serpent.</div>
+      <a href="https://www.wayup.io/collection/45851dd847cf1e49b795f3c6c998e1eb18b9d30afa71e4ce8bff4183" target="_blank" rel="noopener noreferrer" class="btn-gold">OPEN MARKETPLACE &#x2197;</a>
+    </div>
+    <div class="plc plc-green reveal delay-1">
+      <div class="plc-icon"><img src="Images/NFT Energy Design Concept.png" alt="The Collection"></div>
+      <div class="plc-name">THE COLLECTION</div>
+      <div class="plc-desc">Hand-crafted Viper NFTs including legendary Overlords, Serpent Commanders, and rare one-of-ones. Each piece is a collector's treasure.</div>
+      <a href="https://discord.gg/vipercoin" target="_blank" rel="noopener noreferrer" class="btn-green">JOIN FOR DROPS &#x2197;</a>
+    </div>
+    <div class="plc plc-cyan reveal delay-2">
+      <div class="plc-icon"><img src="Images/12.png" alt="NFT Utility"></div>
+      <div class="plc-name">NFT UTILITY</div>
+      <div class="plc-desc">ViperCoin NFT holders get exclusive access to community features, early drops, and future ecosystem benefits.</div>
+      <a href="https://discord.gg/vipercoin" target="_blank" rel="noopener noreferrer" class="btn-cyan">LEARN MORE &#x2197;</a>
+    </div>
+  </div>
+
+  <div class="nft-showcase">
+    <span class="tag tag-gold reveal">SHOWCASE</span>
+    <h2 class="sec-title reveal delay-1">FEATURED <span class="gold">PIECES</span></h2>
+    <div class="nft-marquee-wrap">
+      <div class="nft-marquee-track">
+        <div class="nft-marquee-item"><img src="Images/Savage Serpent.png" alt="Savage Serpent"></div>
+        <div class="nft-marquee-item"><img src="Images/Golden Overlord.png" alt="Golden Overlord"></div>
+        <div class="nft-marquee-item"><img src="Images/Charles Viper.png" alt="Charles Viper"></div>
+        <div class="nft-marquee-item"><img src="Images/Madmusicmaker.png" alt="Madmusicmaker"></div>
+        <div class="nft-marquee-item"><img src="Images/Snekable.png" alt="Snekable"></div>
+        <div class="nft-marquee-item"><img src="Images/Inferno Juggernaut.jpg" alt="Inferno Juggernaut"></div>
+        <div class="nft-marquee-item"><img src="Images/Viper Star.png" alt="Viper Star"></div>
+        <div class="nft-marquee-item"><img src="Images/Dark Scales.png" alt="Dark Scales"></div>
+        <div class="nft-marquee-item"><img src="Images/Serpent-T1000.png" alt="Serpent-T1000"></div>
+        <div class="nft-marquee-item"><img src="Images/Quetzal Coil.png" alt="Quetzal Coil"></div>
+        <div class="nft-marquee-item"><img src="Images/Jack Fang Lantern.jpg" alt="Jack Fang Lantern"></div>
+        <div class="nft-marquee-item"><img src="Images/Frostjaw Nomad.png" alt="Frostjaw Nomad"></div>
+        <div class="nft-marquee-item"><img src="Images/MikeyExile.png" alt="MikeyExile"></div>
+        <div class="nft-marquee-item"><img src="Images/Savage Serpent.png" alt="Savage Serpent"></div>
+        <div class="nft-marquee-item"><img src="Images/Golden Overlord.png" alt="Golden Overlord"></div>
+        <div class="nft-marquee-item"><img src="Images/Charles Viper.png" alt="Charles Viper"></div>
+        <div class="nft-marquee-item"><img src="Images/Madmusicmaker.png" alt="Madmusicmaker"></div>
+        <div class="nft-marquee-item"><img src="Images/Snekable.png" alt="Snekable"></div>
+        <div class="nft-marquee-item"><img src="Images/Inferno Juggernaut.jpg" alt="Inferno Juggernaut"></div>
+        <div class="nft-marquee-item"><img src="Images/Viper Star.png" alt="Viper Star"></div>
+        <div class="nft-marquee-item"><img src="Images/Dark Scales.png" alt="Dark Scales"></div>
+        <div class="nft-marquee-item"><img src="Images/Serpent-T1000.png" alt="Serpent-T1000"></div>
+        <div class="nft-marquee-item"><img src="Images/Quetzal Coil.png" alt="Quetzal Coil"></div>
+        <div class="nft-marquee-item"><img src="Images/Jack Fang Lantern.jpg" alt="Jack Fang Lantern"></div>
+        <div class="nft-marquee-item"><img src="Images/Frostjaw Nomad.png" alt="Frostjaw Nomad"></div>
+        <div class="nft-marquee-item"><img src="Images/MikeyExile.png" alt="MikeyExile"></div>
+      </div>
+    </div>
+    <div class="nft-cta">
+      <a href="https://www.wayup.io/collection/45851dd847cf1e49b795f3c6c998e1eb18b9d30afa71e4ce8bff4183" target="_blank" rel="noopener noreferrer" class="btn-gold">VIEW FULL COLLECTION ON WAYUP &#x2197;</a>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-logo"><img src="assets/Viper_Head%20transparant.png" alt="ViperCoin" onerror="this.style.display='none'"> VIPER<span class="slash">COIN</span></div>
+    <p>&copy; 2026 VIPERCOIN. The Coin with Fangs. Powered by Cardano.</p>
+    <div class="footer-links">
+      <a href="https://x.com/vipercoin_ada" target="_blank" rel="noopener noreferrer">X / TWITTER</a>
+      <a href="https://discord.gg/vipercoin" target="_blank" rel="noopener noreferrer">DISCORD</a>
+      <a href="https://viperswap.io" target="_blank" rel="noopener noreferrer">VIPERSWAP</a>
+      <a href="https://linktr.ee/vipercoin_ada" target="_blank" rel="noopener noreferrer">LINKTREE</a>
+    </div>
+  </footer>
+</div>
+
+<!-- ═══════════════════════════════════
+     CONTACT PAGE
+═══════════════════════════════════ -->
+<div id="pg-contact" class="page">
+  <div class="contact-wrap">
+    <div class="contact-tl">
+      <span class="tag tag-cream">GET IN TOUCH</span>
+      <h1 class="sec-title">JOIN THE<br><span class="r">FANG</span></h1>
+      <p>Find us across all major platforms. We're active, responsive, and always ready to welcome new Vipers into the fold.</p>
+      <p>Whether you have questions, want to collab, or just want to drop a meme — we're here.</p>
+      <img class="contact-char" src="assets/coin-rotate.gif" alt="Viper Coin" onerror="this.src='assets/coin-emoji.png';this.onerror=null;">
+    </div>
+    <div class="contact-tr">
+      <span class="tag tag-dark">FIND US ON</span>
+      <div class="contact-links">
+        <a href="https://x.com/vipercoin_ada" target="_blank" rel="noopener noreferrer" class="contact-fc cfc-tw">
+          <div class="fc-icon"><img src="Images/logo-white.png" alt="X / Twitter" onerror="this.style.display='none'"></div>
+          <div class="fc-title">X / TWITTER</div>
+          <div class="fc-desc">@vipercoin_ada</div>
+        </a>
+        <a href="https://discord.gg/vipercoin" target="_blank" rel="noopener noreferrer" class="contact-fc cfc-dc">
+          <div class="fc-icon"><img src="Images/Discord-Symbol-White.png" alt="Discord" onerror="this.style.display='none'"></div>
+          <div class="fc-title">DISCORD</div>
+          <div class="fc-desc">discord.gg/vipercoin</div>
+        </a>
+        <a href="https://viperswap.io" target="_blank" rel="noopener noreferrer" class="contact-fc cfc-vs">
+          <div class="fc-icon"><img src="Images/VIPERSWAP.png" alt="ViperSwap" onerror="this.style.display='none'"></div>
+          <div class="fc-title">VIPERSWAP</div>
+          <div class="fc-desc">viperswap.io</div>
+        </a>
+        <a href="https://www.wayup.io/collection/45851dd847cf1e49b795f3c6c998e1eb18b9d30afa71e4ce8bff4183" target="_blank" rel="noopener noreferrer" class="contact-fc cfc-wu">
+          <div class="fc-icon"><img src="Images/WayUp Logo.jpg" alt="WayUp" onerror="this.style.display='none'"></div>
+          <div class="fc-title">WAYUP NFTs</div>
+          <div class="fc-desc">wayup.io — Viper Collection</div>
+        </a>
+      </div>
+    </div>
+  </div>
+  <footer>
+    <div class="footer-logo"><img src="assets/Viper_Head%20transparant.png" alt="ViperCoin" onerror="this.style.display='none'"> VIPER<span class="slash">COIN</span></div>
+    <p>&copy; 2026 VIPERCOIN. The Coin with Fangs. Powered by Cardano.</p>
+    <div class="footer-links">
+      <a href="https://x.com/vipercoin_ada" target="_blank" rel="noopener noreferrer">X / TWITTER</a>
+      <a href="https://discord.gg/vipercoin" target="_blank" rel="noopener noreferrer">DISCORD</a>
+      <a href="https://viperswap.io" target="_blank" rel="noopener noreferrer">VIPERSWAP</a>
+      <a href="https://linktr.ee/vipercoin_ada" target="_blank" rel="noopener noreferrer">LINKTREE</a>
+    </div>
+  </footer>
+</div>
+
+<script>
+// ═══════════════════════════════════
+//  MEME DATA
+// ═══════════════════════════════════
+function buildMemeList(){
+  const ranges=[
+    [1,18,'jpg'],[19,35,'jpeg'],[36,61,'jpg'],[62,66,'jpeg'],[67,68,'jpg'],
+    [69,69,'webp'],[70,70,'jpg'],[71,74,'png'],[75,77,'jpg'],[78,78,'png'],
+    [79,79,'jpg'],[80,82,'png'],[83,83,'jpg'],[84,84,'jpeg'],[85,86,'jpg'],
+    [87,88,'png'],[89,89,'jpg'],[90,93,'png'],[94,97,'jpg'],[98,100,'png'],
+    [101,102,'jpg'],[103,107,'png'],[108,108,'jpg'],[109,115,'png'],
+    [116,117,'jpg'],[118,120,'png'],[121,123,'jpg'],[124,124,'png'],
+    [125,128,'jpg'],[129,139,'png'],[140,140,'jpg'],[141,145,'png'],
+    [146,147,'jpg'],[148,151,'png'],[152,156,'jpg'],[157,160,'png'],
+    [161,162,'jpg'],[163,172,'png'],[173,181,'jpg'],[182,185,'png'],
+    [186,187,'jpg'],[188,189,'png'],[190,190,'jpg'],[191,197,'png'],
+    [198,202,'jpg'],[203,214,'png'],[215,217,'jpg'],[218,235,'png'],
+    [236,243,'jpg'],[244,247,'png'],[248,278,'jpg'],[279,279,'png'],
+    [280,287,'jpg'],[288,407,'png'],[408,408,'jpg'],[409,411,'png'],
+    [412,412,'webp'],[413,414,'png'],[415,485,'jpg'],[486,514,'png'],
+    [515,542,'jpg'],[543,545,'png'],[546,548,'jpg'],[549,549,'png'],
+    [550,550,'jpeg'],[551,552,'png'],[553,562,'webp']
+  ];
+  const list=[];
+  for(const [s,e,ext] of ranges){
+    for(let i=s;i<=e;i++){
+      list.push('Viper_Meme_'+String(i).padStart(4,'0')+'.'+ext);
+    }
+  }
+  return list;
+}
+const MEMES=buildMemeList();
+document.querySelectorAll('.js-meme-count').forEach(el=>el.textContent=MEMES.length);
+const _mStat=document.getElementById('js-meme-stat');
+if(_mStat) _mStat.setAttribute('data-count',MEMES.length);
+
+function buildGifList(){
+  const list=[];
+  for(let i=1;i<=40;i++) list.push('Viper_GIF_'+String(i).padStart(4,'0')+'.gif');
+  return list;
+}
+function buildStickerList(){
+  const skip=new Set([5]);
+  const list=[];
+  for(let i=1;i<=46;i++){if(!skip.has(i)) list.push('Viper_Sticker_'+String(i).padStart(4,'0')+'.png');}
+  return list;
+}
+const GIFS=buildGifList();
+const STICKERS=buildStickerList();
+
+let activeTab='memes';
+function switchTab(tab){
+  activeTab=tab;
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.toggle('active',b.dataset.tab===tab));
+  const counts={memes:MEMES.length,gifs:GIFS.length,stickers:STICKERS.length};
+  const labels={memes:'memes',gifs:'GIFs',stickers:'stickers'};
+  const numEl=document.getElementById('meme-page-num');
+  const lblEl=document.getElementById('meme-page-label');
+  if(numEl) numEl.textContent=counts[tab];
+  if(lblEl) lblEl.textContent=labels[tab];
+  buildActiveGrid();
+}
+
+// ═══════════════════════════════════
+//  NAVIGATION
+// ═══════════════════════════════════
+const PAGES=['home','lore','memes','about','products','nfts','contact'];
+let currentPage='home';
+
+function goto(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-links a').forEach(a=>a.classList.remove('active'));
+  const pg=document.getElementById('pg-'+id);
+  const nl=document.getElementById('nl-'+id);
+  if(pg) pg.classList.add('active');
+  if(nl) nl.classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+  currentPage=id;
+  if(id==='memes' && !memeGridBuilt) buildActiveGrid();
+  setTimeout(initReveal,100);
+  if(id==='home') initCanvas();
+}
+
+// ═══════════════════════════════════
+//  HAMBURGER MENU
+// ═══════════════════════════════════
+function toggleMobile(){
+  document.getElementById('hbg').classList.toggle('open');
+  document.getElementById('mmenu').classList.toggle('open');
+}
+function closeMobile(){
+  document.getElementById('hbg').classList.remove('open');
+  document.getElementById('mmenu').classList.remove('open');
+}
+document.addEventListener('click',function(e){
+  const menu=document.getElementById('mmenu');
+  const hbg=document.getElementById('hbg');
+  if(menu.classList.contains('open')&&!menu.contains(e.target)&&!hbg.contains(e.target)){
+    closeMobile();
+  }
+});
+
+// ═══════════════════════════════════
+//  CANVAS PARTICLES (HERO)
+// ═══════════════════════════════════
+function initCanvas(){
+  const canvas=document.getElementById('hero-canvas');
+  if(!canvas) return;
+  const ctx=canvas.getContext('2d');
+  let W,H,dots=[];
+
+  function resize(){
+    W=canvas.width=canvas.offsetWidth;
+    H=canvas.height=canvas.offsetHeight;
+    spawnDots();
+  }
+
+  function spawnDots(){
+    const count=Math.floor((W*H)/14000);
+    dots=[];
+    for(let i=0;i<count;i++){
+      dots.push({
+        x:Math.random()*W, y:Math.random()*H,
+        r:Math.random()*1.5+0.5,
+        vx:(Math.random()-0.5)*0.3,
+        vy:(Math.random()-0.5)*0.3,
+        a:Math.random()*0.4+0.05
+      });
+    }
+  }
+
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    for(const d of dots){
+      ctx.beginPath();
+      ctx.arc(d.x,d.y,d.r,0,Math.PI*2);
+      ctx.fillStyle=`rgba(159,217,78,${d.a})`;
+      ctx.fill();
+      d.x+=d.vx; d.y+=d.vy;
+      if(d.x<0||d.x>W) d.vx*=-1;
+      if(d.y<0||d.y>H) d.vy*=-1;
+    }
+    // draw connections
+    for(let i=0;i<dots.length;i++){
+      for(let j=i+1;j<dots.length;j++){
+        const dx=dots[i].x-dots[j].x,dy=dots[i].y-dots[j].y;
+        const dist=Math.sqrt(dx*dx+dy*dy);
+        if(dist<100){
+          ctx.beginPath();
+          ctx.moveTo(dots[i].x,dots[i].y);
+          ctx.lineTo(dots[j].x,dots[j].y);
+          ctx.strokeStyle=`rgba(159,217,78,${0.08*(1-dist/100)})`;
+          ctx.lineWidth=0.5;
+          ctx.stroke();
+        }
+      }
+    }
+    requestAnimationFrame(draw);
+  }
+
+  new ResizeObserver(resize).observe(canvas.parentElement);
+  resize();
+  draw();
+}
+
+// ═══════════════════════════════════
+//  SCROLL REVEAL
+// ═══════════════════════════════════
+function initReveal(){
+  const obs=new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{if(e.isIntersecting) e.target.classList.add('vis');});
+  },{threshold:0.1});
+  document.querySelectorAll('.page.active .reveal,.page.active .reveal-left,.page.active .reveal-right').forEach(el=>{
+    if(!el.classList.contains('vis')) obs.observe(el);
+    else el.classList.add('vis');
+  });
+}
+
+// ═══════════════════════════════════
+//  STAT COUNTER ANIMATION
+// ═══════════════════════════════════
+function animateCounters(){
+  document.querySelectorAll('.stat-num[data-count]').forEach(el=>{
+    const target=parseInt(el.dataset.count);
+    let current=0;
+    const step=Math.ceil(target/60);
+    const timer=setInterval(()=>{
+      current=Math.min(current+step,target);
+      el.textContent=current.toLocaleString();
+      if(current>=target){
+        el.textContent=target.toLocaleString()+(target===1?'':target>9999?'+':'');
+        clearInterval(timer);
+      }
+    },16);
+  });
+}
+
+// ═══════════════════════════════════
+//  MEME GALLERY
+// ═══════════════════════════════════
+let memeGridBuilt=false;
+
+function buildActiveGrid(){
+  const grid=document.getElementById('meme-grid');
+  grid.innerHTML='';
+  const cfg={
+    memes:{list:MEMES,folder:'Viper Memes/',label:'MEME',lazy:true},
+    gifs: {list:GIFS, folder:'Viper GIFs/', label:'GIF', lazy:false},
+    stickers:{list:STICKERS,folder:'Viper Stickers/',label:'STICKER',lazy:true}
+  }[activeTab];
+  cfg.list.forEach(fname=>{
+    const num=fname.match(/(\d+)/)[1];
+    const src=cfg.folder+fname;
+    const card=document.createElement('div');
+    card.className='mc';
+    card.innerHTML=`
+      <img src="${src}" alt="Viper ${cfg.label} #${num}"${cfg.lazy?' loading="lazy"':''}>
+      <div class="mo">
+        <div class="mo-name">${cfg.label} #${String(num).padStart(4,'0')}</div>
+        <button type="button" class="dl-btn" onclick="event.stopPropagation();dlSingle('${src}','${fname}')">&#x21E9; DOWNLOAD</button>
+      </div>`;
+    card.addEventListener('click',()=>openLB(src,fname,num));
+    grid.appendChild(card);
+  });
+  memeGridBuilt=true;
+}
+function buildMemeGrid(){buildActiveGrid();}
+
+// ═══════════════════════════════════
+//  LIGHTBOX
+// ═══════════════════════════════════
+let _lbSrc='',_lbFname='';
+
+function openLB(src,fname,num){
+  _lbSrc=src; _lbFname=fname;
+  const img=document.getElementById('lb-img');
+  const name=document.getElementById('lb-name');
+  const dlBtn=document.getElementById('lb-dl-btn');
+  img.src=src;
+  const lbLabels={memes:'MEME',gifs:'GIF',stickers:'STICKER'};
+  name.textContent=(lbLabels[activeTab]||'MEME')+' #'+String(num).padStart(4,'0');
+  dlBtn.href=src;
+  dlBtn.setAttribute('download',fname);
+  document.getElementById('lb-overlay').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+
+async function shareOnX(){
+  const tweetText='$VIPER\nviperswap.io\n#ViperCoin #Cardano #Meme';
+  // Try native share with image file (works on mobile & modern desktop)
+  if(navigator.share && navigator.canShare){
+    try{
+      const resp=await fetch(_lbSrc);
+      const blob=await resp.blob();
+      const file=new File([blob],_lbFname,{type:blob.type});
+      if(navigator.canShare({files:[file]})){
+        await navigator.share({text:tweetText,files:[file]});
+        return;
+      }
+    }catch(e){ /* fall through */ }
+  }
+  // Fallback: Web Intent (text only)
+  window.open('https://twitter.com/intent/tweet?text='+encodeURIComponent(tweetText),'_blank','noopener,noreferrer');
+}
+
+function closeLB(){
+  document.getElementById('lb-overlay').classList.remove('open');
+  document.body.style.overflow='';
+  setTimeout(()=>{document.getElementById('lb-img').src='';},300);
+}
+
+function lbClickOutside(e){
+  if(e.target===document.getElementById('lb-overlay')) closeLB();
+}
+
+document.addEventListener('keydown',e=>{if(e.key==='Escape') closeLB();});
+
+function dlSingle(path,filename){
+  const a=document.createElement('a');
+  a.href=path;
+  a.download=filename;
+  a.click();
+}
+
+async function downloadAll(){
+  const dlCfg={
+    memes:{list:MEMES,folder:'Viper Memes/',zipName:'ViperCoin_Memes',folderName:'ViperCoin_Memes'},
+    gifs: {list:GIFS, folder:'Viper GIFs/', zipName:'ViperCoin_GIFs', folderName:'ViperCoin_GIFs'},
+    stickers:{list:STICKERS,folder:'Viper Stickers/',zipName:'ViperCoin_Stickers',folderName:'ViperCoin_Stickers'}
+  };
+  const cfg=dlCfg[activeTab];
+  const btn=document.getElementById('dl-all-btn');
+  const prog=document.getElementById('dl-progress');
+  const wrap=document.getElementById('progress-wrap');
+  const bar=document.getElementById('progress-bar');
+  btn.disabled=true;
+  prog.style.display='block';
+  wrap.style.display='block';
+
+  if(typeof JSZip==='undefined'){
+    alert('JSZip not loaded. Please make sure you are connected to the internet.');
+    btn.disabled=false;
+    prog.style.display='none';
+    wrap.style.display='none';
+    return;
+  }
+
+  const zip=new JSZip();
+  const zipFolder=zip.folder(cfg.folderName);
+  const total=cfg.list.length;
+  let done=0;
+
+  for(const fname of cfg.list){
+    try{
+      const res=await fetch(cfg.folder+fname);
+      if(res.ok){
+        const blob=await res.blob();
+        zipFolder.file(fname,blob);
+      }
+    }catch(e){}
+    done++;
+    const pct=Math.round((done/total)*100);
+    bar.style.width=pct+'%';
+    prog.textContent=`Packing ${done}/${total}...`;
+  }
+
+  prog.textContent='Generating zip...';
+  const content=await zip.generateAsync({type:'blob',compression:'DEFLATE',compressionOptions:{level:3}});
+  saveAs(content,cfg.zipName+'.zip');
+  prog.textContent='Done!';
+  btn.disabled=false;
+  setTimeout(()=>{prog.style.display='none';wrap.style.display='none';},3000);
+}
+
+// ═══════════════════════════════════
+//  CHARACTER SLIDESHOW
+// ═══════════════════════════════════
+function initCharSlideshow(){
+  const slides=document.querySelectorAll('#char-slideshow .hero-char');
+  if(!slides.length) return;
+  let idx=0;
+  setInterval(()=>{
+    slides[idx].classList.remove('active');
+    idx=(idx+1)%slides.length;
+    slides[idx].classList.add('active');
+  },5000);
+}
+
+// ═══════════════════════════════════
+//  INIT
+// ═══════════════════════════════════
+window.addEventListener('DOMContentLoaded',()=>{
+  initReveal();
+  initCanvas();
+  initCharSlideshow();
+  setTimeout(animateCounters,800);
+});
+</script>
+</body>
+</html>

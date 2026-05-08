@@ -56,6 +56,8 @@ vipercoinio-website/
 ├── Branding Assets/         ← SVGs, PNGs, brand kit (for reference/design)
 │   ├── SVG/
 │   └── PNG/
+├── Viper GIFs/              ← 40 GIF animations for the Meme page GIFs tab
+├── Viper Stickers/          ← 45 sticker PNGs for the Meme page Stickers tab
 ├── CHANGELOG.md             ← Updated after every change
 ├── CLAUDE.md                ← This file
 ├── GETTING_STARTED.md       ← Onboarding guide for new contributors
@@ -63,15 +65,17 @@ vipercoinio-website/
 ```
 
 **NOT in this repo (too large):**
-- `Viper Memes/` — 562 meme images (469 MB). These must be kept in the same folder as `Website v2.html` locally for the meme gallery to work. They are not needed to edit other pages.
+- `Viper Memes/` — 562 meme images (469 MB). These must be kept in the same folder as `Website v4.html` locally for the meme gallery to work. They are not needed to edit other pages.
 
 ---
 
 ## Working File
 
-**`Website v2.html` is the only file that contains the website.** All CSS and JS are inline. To preview changes, open the file directly in a browser or use VS Code's Live Server extension.
+**`Website v4.html` is the current active file.** All CSS and JS are inline. To preview changes, open the file directly in a browser or use VS Code's Live Server extension.
 
-When you edit `Website v2.html`, changes to HTML/CSS/JS are immediately visible on refresh.
+Previous versions kept for rollback: `Website v3.html`, `Website v2.html`.
+
+When you edit `Website v4.html`, changes to HTML/CSS/JS are immediately visible on refresh.
 
 ---
 
