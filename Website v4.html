@@ -174,7 +174,7 @@ footer p{font-size:0.82rem;color:#fff;}
 .stat-frac{font-size:0.55em;opacity:0.5;letter-spacing:0;}
 
 /* FEATURE SECTION */
-.feat-section{padding:5rem;background-color:var(--bg);background-image:radial-gradient(var(--dot-dark) 1.5px,transparent 1.5px);background-size:24px 24px;}
+.feat-section{padding:5rem;background-color:var(--bg);}
 .feat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1.2rem;margin-top:3rem;align-items:stretch;}
 .fc{padding:2.2rem;display:grid;grid-template-columns:1fr auto;grid-template-rows:auto 1fr;gap:1rem 1rem;align-items:start;align-content:start;border:2px solid var(--border);background:var(--fc-color,var(--red));color:#000;transition:all 0.3s;position:relative;overflow:hidden;cursor:default;}
 .fc:hover{transform:translateY(-6px);border-color:#fff;box-shadow:0 16px 36px var(--fc-shadow,rgba(214,60,42,0.1));}
@@ -244,6 +244,45 @@ footer p{font-size:0.82rem;color:#fff;}
 .dl-label{font-family:'TGS Perfect Condensed',sans-serif;font-size:1rem;letter-spacing:1px;}
 .dl-pct{font-size:0.8rem;color:var(--text);}
 
+/* SNAKE TIMELINE */
+.snake-timeline{padding:4rem 5rem;background-color:var(--bg);background-image:radial-gradient(var(--dot-dark) 1.5px,transparent 1.5px);background-size:24px 24px;}
+.snake-path{position:relative;max-width:1000px;margin:0 auto;padding:1rem 0;}
+.snake-path::before{content:'';position:absolute;left:50%;top:0;bottom:0;width:3px;transform:translateX(-50%);background:linear-gradient(to bottom,var(--red) 0%,var(--gold) 30%,var(--green) 60%,var(--cyan) 80%,var(--red) 100%);border-radius:2px;}
+.sn-row{display:grid;grid-template-columns:1fr 3rem 1fr;margin-bottom:2.5rem;align-items:start;position:relative;}
+.sn-row:last-child{margin-bottom:0;}
+.sn-center{display:flex;justify-content:center;padding-top:1.7rem;position:relative;z-index:2;}
+.sn-dot{width:20px;height:20px;border-radius:50%;background:var(--sn-col,var(--red));border:4px solid var(--bg);}
+.sn-half-left{padding-right:1.5rem;display:flex;justify-content:flex-end;}
+.sn-half-right{padding-left:1.5rem;}
+.sn-card{padding:1.8rem 1.8rem 1.8rem 2.5rem;border:1px solid var(--border);background:rgba(255,255,255,0.02);border-radius:12px;position:relative;transition:border-color 0.2s;width:100%;}
+.sn-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;border-radius:4px 0 0 4px;background:var(--sn-col,var(--red));}
+.sn-card:hover{border-color:rgba(255,255,255,0.12);}
+.sn-half-left .sn-card::after{content:'';position:absolute;right:-3rem;top:calc(1.7rem + 9px);height:2px;width:3rem;background:var(--sn-col,var(--red));}
+.sn-half-right .sn-card::after{content:'';position:absolute;left:-3rem;top:calc(1.7rem + 9px);height:2px;width:3rem;background:var(--sn-col,var(--red));}
+.sn-label{font-family:'TGS Perfect Condensed',sans-serif;font-size:0.7rem;letter-spacing:4px;color:var(--sn-col,var(--red));margin-bottom:0.4rem;}
+.sn-title{font-family:'TGS Perfect Condensed',sans-serif;font-size:1.5rem;letter-spacing:1px;margin-bottom:0.7rem;line-height:1.1;}
+.sn-text{font-size:0.88rem;color:var(--text);line-height:1.9;}
+.snake-final{padding:3rem 2rem;text-align:center;border-top:1px solid var(--border);margin-top:2rem;}
+.snake-final p{font-size:0.95rem;color:var(--text);line-height:2.1;max-width:640px;margin:0 auto;}
+.snake-final em{color:#fff;font-style:normal;}
+
+/* LAW OF THE SERPENT (Tokenomics) */
+.law-section{padding:5rem;background-color:var(--bg2);background-image:radial-gradient(var(--dot-dark) 1.5px,transparent 1.5px);background-size:24px 24px;}
+.law-section-hdr{text-align:center;max-width:740px;margin:0 auto 4rem;}
+.law-text p{font-size:1.05rem;color:var(--text);line-height:1.9;margin-bottom:0.6rem;text-align:center;}
+.law-rules{display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem;max-width:980px;margin:0 auto 3.5rem;}
+.law-rule{padding:2.8rem 2.5rem 3.5rem;border:1px solid var(--border);background:var(--bg3);border-radius:12px;position:relative;overflow:hidden;transition:border-color 0.2s;}
+.law-rule::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--red);}
+.law-rule:hover{border-color:rgba(214,60,42,0.35);}
+.law-rule-num{font-family:'TGS Perfect Condensed',sans-serif;font-size:9rem;line-height:1;color:rgba(255,255,255,0.04);position:absolute;bottom:-1rem;right:1.2rem;pointer-events:none;letter-spacing:-4px;-webkit-user-select:none;user-select:none;}
+.law-rule-text{font-family:'TGS Perfect Condensed',sans-serif;font-size:2rem;letter-spacing:2px;color:#fff;line-height:1.1;}
+.law-closing{text-align:center;max-width:680px;margin:0 auto;font-size:0.97rem;color:var(--text);line-height:2;}
+.law-closing em{color:var(--red);font-style:normal;}
+.sn-red{--sn-col:var(--red);}
+.sn-gold{--sn-col:var(--gold);}
+.sn-green{--sn-col:var(--green);}
+.sn-cyan{--sn-col:var(--cyan);}
+
 /* ══════════════════════════════════════
    MEMES PAGE
 ══════════════════════════════════════ */
@@ -305,7 +344,7 @@ footer p{font-size:0.82rem;color:#fff;}
 .mission-sec{padding:5rem;background-color:var(--bg2);background-image:radial-gradient(var(--dot-dark) 1.5px,transparent 1.5px);background-size:24px 24px;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;}
 .mission-text p{font-size:1rem;color:var(--text);line-height:1.8;margin-bottom:1.2rem;}
 .values-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
-.val-card{padding:1.5rem;border:2px solid var(--border);background:rgba(255,255,255,0.02);transition:all 0.3s;}
+.val-card{padding:1.5rem;border:2px solid var(--border);background:var(--bg3);transition:all 0.3s;}
 .val-card:hover{border-color:var(--fc-color,var(--red));transform:translateY(-6px);box-shadow:0 16px 36px var(--fc-shadow,rgba(214,60,42,0.45));}
 .val-icon{font-size:1.8rem;margin-bottom:0.8rem;display:flex;align-items:center;}
 .val-icon img{width:48px;height:48px;object-fit:contain;display:block;}
@@ -313,7 +352,7 @@ footer p{font-size:0.82rem;color:#fff;}
 .val-desc{font-size:0.82rem;color:var(--text);line-height:1.5;}
 .team-sec{padding:5rem;background-color:var(--bg);background-image:radial-gradient(var(--dot-dark) 1.5px,transparent 1.5px);background-size:24px 24px;}
 .team-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1.2rem;margin-top:3rem;}
-.tc{padding:2rem 1.5rem;text-align:center;border:2px solid var(--border);background:rgba(255,255,255,0.02);transition:all 0.3s;position:relative;overflow:hidden;}
+.tc{padding:2rem 1.5rem;text-align:center;border:2px solid var(--border);background:var(--bg3);transition:all 0.3s;position:relative;overflow:hidden;}
 .tc::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--tc-color,var(--red));}
 .tc:hover{border-color:var(--tc-color,var(--red));transform:translateY(-6px);box-shadow:0 16px 36px var(--tc-shadow,rgba(214,60,42,0.45));}
 .tc-red{--tc-color:var(--red);--tc-shadow:rgba(214,60,42,0.45);}
@@ -324,8 +363,14 @@ footer p{font-size:0.82rem;color:#fff;}
 .tc-av img{width:100%;height:100%;object-fit:cover;display:block;}
 .tc-name{font-family:'TGS Perfect Condensed',sans-serif;font-size:1.1rem;letter-spacing:2px;}
 .tc-role{font-size:0.78rem;color:var(--text);margin-top:4px;}
-.tc-x{display:inline-flex;align-items:center;gap:5px;font-family:'TGS Perfect Condensed',sans-serif;font-size:0.8rem;letter-spacing:1px;color:rgba(255,255,255,0.3);text-decoration:none;margin-top:0.6rem;transition:color 0.2s;}
-.tc-x:hover{color:#fff;}
+.tc-x{display:inline-flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.35);text-decoration:none;margin-top:0.8rem;font-size:1.6rem;transition:color 0.2s,transform 0.2s;}
+.tc-x:hover{color:#fff;transform:scale(1.15);}
+.tc-socials{display:flex;align-items:center;justify-content:center;gap:1rem;margin-top:0.8rem;}
+.tc-socials .tc-x{margin-top:0;}
+.tc-lt{display:inline-flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.35);text-decoration:none;font-size:1.6rem;line-height:1;transition:color 0.2s,transform 0.2s;}
+.tc-lt img{width:1em;height:1em;display:block;filter:brightness(0) invert(1);opacity:0.35;transition:opacity 0.2s;}
+.tc-lt:hover img{opacity:1;}
+.tc-lt:hover{transform:scale(1.15);}
 
 /* ══════════════════════════════════════
    PRODUCTS PAGE
@@ -483,10 +528,12 @@ footer p{font-size:0.82rem;color:#fff;}
   .contact-tr{padding:3rem 2rem;}
   .sp-red,.sp-dark{padding:3rem 2rem;}
   .stats-row{grid-template-columns:repeat(2,1fr);}
-  .feat-section,.lore-blocks,.steps-sec,.big-cta,.team-sec,.nft-showcase,.nft-platforms,.mission-sec{padding:3rem 2rem;}
+  .feat-section,.lore-blocks,.steps-sec,.big-cta,.team-sec,.nft-showcase,.nft-platforms,.mission-sec,.snake-timeline{padding:3rem 2rem;}
   .fc .fc-icon{width:48px;height:48px;}
   .prod-hero{padding:160px 2rem 3rem;}
   .token-visual{grid-template-columns:1fr;padding:3rem 2rem;gap:2rem;}
+  .law-section{padding:3rem 2rem;}
+  .law-rules{grid-template-columns:1fr;}
   .mission-sec{grid-template-columns:1fr;}
   .meme-head,.meme-grid{padding-left:1.5rem;padding-right:1.5rem;}
   .prod-grid{padding:1.5rem 1.5rem 3rem;}
@@ -496,7 +543,15 @@ footer p{font-size:0.82rem;color:#fff;}
   .stats-row{grid-template-columns:1fr 1fr;}
   .stat-cell{padding:1.4rem 1rem;}
   .stat-num{font-size:2.2rem;}
-  .feat-section,.lore-blocks,.steps-sec,.big-cta,.team-sec,.nft-showcase{padding:2.5rem 1.2rem;}
+  .feat-section,.lore-blocks,.steps-sec,.big-cta,.team-sec,.nft-showcase,.snake-timeline{padding:2.5rem 1.2rem;}
+  .snake-path::before{display:none;}
+  .sn-row{display:flex;flex-direction:column;gap:0;}
+  .sn-center{display:none;}
+  .sn-row-left .sn-half-right,.sn-row-right .sn-half-left{display:none;}
+  .sn-half-left,.sn-half-right{padding:0;width:100%;}
+  .sn-half-left{justify-content:stretch;}
+  .sn-half-left .sn-card::after,.sn-half-right .sn-card::after{display:none;}
+  .snake-final{padding:2rem 0.5rem;}
   .fc{padding:1.6rem;}
   .fc .fc-icon{width:42px;height:42px;}
   .fc-title,.fc .fc-title{font-size:1.5rem;}
@@ -736,7 +791,6 @@ footer p{font-size:0.82rem;color:#fff;}
       <span class="tag tag-cream">THE STORY</span>
       <h1 class="sec-title">THE LORE OF<br><span>VIPER</span>COIN</h1>
       <p>Deep in the Cardano blockchain, a serpent stirs. VIPERCOIN was forged in the fires of community passion, meme culture, and a relentless desire to bite back against the mediocre.</p>
-      <p>More lore and the full story coming soon...</p>
     </div>
     <div class="lore-tr">
       <img src="Images/Viper_GIF_0020.gif" alt="Viper" onerror="this.style.display='none'">
@@ -745,66 +799,117 @@ footer p{font-size:0.82rem;color:#fff;}
 
   <div class="color-stripe"><div class="cs-red"></div><div class="cs-orange"></div><div class="cs-gold"></div><div class="cs-green"></div><div class="cs-cyan"></div><div class="cs-purple"></div><div class="cs-pink"></div></div>
 
-  <div class="lore-blocks">
-    <span class="tag reveal">LORE — CHAPTER ONE</span>
-    <h2 class="sec-title reveal delay-1">THE ORIGIN<br><span class="g">STORY</span></h2>
-    <div class="lb lb-red reveal">
-      <div class="lb-label">GENESIS</div>
-      <div class="lb-title">THE SERPENT AWAKENS</div>
-      <div class="lb-text">Content coming soon. The full origin story of ViperCoin — how the serpent was born on Cardano, who forged it, and why it was destined to strike fear into the mundane world of crypto...</div>
-    </div>
-    <div class="lb lb-green reveal">
-      <div class="lb-label">CHAPTER II</div>
-      <div class="lb-title">THE FANG ASSEMBLY</div>
-      <div class="lb-text">Content coming soon. The gathering of the first Vipers — a ragtag squad of Cardano degens who saw the vision and never looked back...</div>
-    </div>
-    <div class="lb lb-gold reveal">
-      <div class="lb-label">CHAPTER III</div>
-      <div class="lb-title">THE MEME WARS</div>
-      <div class="lb-text">Content coming soon. How ViperCoin's meme culture became the most potent weapon in the Cardano ecosystem...</div>
-    </div>
-  </div>
+  <div class="snake-timeline">
+    <span class="tag reveal">LORE</span>
+    <h2 class="sec-title reveal delay-1">VIPER REFUSED<br><span class="r">THE GRAVE</span></h2>
 
-  <div class="token-visual">
-    <div class="donut-wrap reveal-left">
-      <svg class="donut-svg" viewBox="0 0 120 120">
-        <circle cx="60" cy="60" r="50" fill="none" stroke="var(--bg3)" stroke-width="18"/>
-        <circle cx="60" cy="60" r="50" fill="none" stroke="var(--green)" stroke-width="18"
-          stroke-dasharray="188.5 314.2" stroke-dashoffset="78.5" transform="rotate(-90 60 60)"/>
-        <circle cx="60" cy="60" r="50" fill="none" stroke="var(--red)" stroke-width="18"
-          stroke-dasharray="78.5 314.2" stroke-dashoffset="-110" transform="rotate(-90 60 60)"/>
-        <circle cx="60" cy="60" r="50" fill="none" stroke="var(--gold)" stroke-width="18"
-          stroke-dasharray="47.1 314.2" stroke-dashoffset="-188.5" transform="rotate(-90 60 60)"/>
-        <circle cx="60" cy="60" r="50" fill="none" stroke="var(--purple)" stroke-width="18"
-          stroke-dasharray="31.4 314.2" stroke-dashoffset="-235.6" transform="rotate(-90 60 60)"/>
-        <text x="60" y="56" text-anchor="middle" fill="#fff" font-family="TGS Perfect Condensed" font-size="14" letter-spacing="1">TOKEN</text>
-        <text x="60" y="70" text-anchor="middle" fill="rgba(255,255,255,0.45)" font-family="TGS Perfect Condensed" font-size="9">DISTRIBUTION</text>
-      </svg>
-    </div>
-    <div class="reveal-right">
-      <span class="tag tag-green">TOKENOMICS</span>
-      <h2 class="sec-title-sm">TOKEN<br>DISTRIBUTION</h2>
-      <div class="donut-legend">
-        <div class="dl-item"><div class="dl-dot dl-dot-green"></div><div><div class="dl-label">COMMUNITY &amp; ECOSYSTEM</div><div class="dl-pct">60% — TBD</div></div></div>
-        <div class="dl-item"><div class="dl-dot dl-dot-red"></div><div><div class="dl-label">LIQUIDITY POOL</div><div class="dl-pct">25% — TBD</div></div></div>
-        <div class="dl-item"><div class="dl-dot dl-dot-gold"></div><div><div class="dl-label">DEVELOPMENT</div><div class="dl-pct">10% — TBD</div></div></div>
-        <div class="dl-item"><div class="dl-dot dl-dot-purple"></div><div><div class="dl-label">MARKETING</div><div class="dl-pct">5% — TBD</div></div></div>
+    <div class="snake-path">
+
+      <div class="sn-row sn-row-left sn-red">
+        <div class="sn-half-left">
+          <div class="sn-card reveal">
+            <div class="sn-label">CHAPTER I</div>
+            <div class="sn-title">DRAGGED FROM THE STORM</div>
+            <p class="sn-text">Most projects are born in comfort. Polished websites. Soft hands. Big promises whispered over charts glowing green for a season.<br><br>Viper was not born that way.<br><br>Viper was dragged screaming from the storm.</p>
+          </div>
+        </div>
+        <div class="sn-center"><div class="sn-dot"></div></div>
+        <div class="sn-half-right"></div>
       </div>
-      <p class="token-note">Full tokenomics details coming soon. Numbers to be confirmed with official documentation.</p>
+
+      <div class="sn-row sn-row-right sn-gold">
+        <div class="sn-half-left"></div>
+        <div class="sn-center"><div class="sn-dot"></div></div>
+        <div class="sn-half-right">
+          <div class="sn-card reveal delay-1">
+            <div class="sn-label">CHAPTER II</div>
+            <div class="sn-title">THE LONGSHIPS CROSS THE CANDLES</div>
+            <p class="sn-text">When the first longships crossed the green candles, there was no kingdom waiting beyond the fog — only ruin, betrayal, and the cold certainty that nobody was coming to save them.<br><br>The men who carried the serpent banner were not dreamers chasing easy gold. They were builders. Raiders. Survivors. The kind who learned to laugh when the fire reached the walls.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="sn-row sn-row-left sn-red">
+        <div class="sn-half-left">
+          <div class="sn-card reveal">
+            <div class="sn-label">CHAPTER III</div>
+            <div class="sn-title">AND FIRE ALWAYS CAME</div>
+            <p class="sn-text">Treasuries vanished. Leaders disappeared into the night. Entire seasons were spent fighting for survival itself.<br><br>Any ordinary project would have become another forgotten name carved into the graveyard of dead chains and abandoned communities.</p>
+          </div>
+        </div>
+        <div class="sn-center"><div class="sn-dot"></div></div>
+        <div class="sn-half-right"></div>
+      </div>
+
+      <div class="sn-row sn-row-right sn-green">
+        <div class="sn-half-left"></div>
+        <div class="sn-center"><div class="sn-dot"></div></div>
+        <div class="sn-half-right">
+          <div class="sn-card reveal delay-1">
+            <div class="sn-label">CHAPTER IV</div>
+            <div class="sn-title">SOMEONE LIT ANOTHER TORCH</div>
+            <p class="sn-text">But Viper was never ordinary. Every time the world thought the serpent had finally been buried beneath the snow… someone in the tribe lit another torch.<br><br>A developer stayed awake rebuilding what others abandoned. A holder refused to leave. A creator made another meme while the chart bled red. A community member welcomed newcomers as if the halls had never burned at all.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="sn-row sn-row-left sn-cyan">
+        <div class="sn-half-left">
+          <div class="sn-card reveal">
+            <div class="sn-label">CHAPTER V</div>
+            <div class="sn-title">HELD TOGETHER BY CONVICTION</div>
+            <p class="sn-text">That is the secret outsiders never understand — Viper was not held together by money. It was held together by conviction.<br><br>No corporation can manufacture that. No influencer can fake it. No marketing budget can buy it.<br><br>You either survive the winter… or you don't.<br><br>Viper did. Again. And again. And again.</p>
+          </div>
+        </div>
+        <div class="sn-center"><div class="sn-dot"></div></div>
+        <div class="sn-half-right"></div>
+      </div>
+
+      <div class="sn-row sn-row-right sn-red">
+        <div class="sn-half-left"></div>
+        <div class="sn-center"><div class="sn-dot"></div></div>
+        <div class="sn-half-right">
+          <div class="sn-card reveal delay-1">
+            <div class="sn-label">CHAPTER VI</div>
+            <div class="sn-title">SCARS ARE PROOF YOU SURVIVED</div>
+            <p class="sn-text">Over time, the serpent changed. It stopped chasing the approval of the market. Stopped pretending to be a polished empire with endless promises and carefully rehearsed roadmaps.<br><br>Instead, Viper became something far rarer in this space: Real. Not mercenaries. Not tourists. Not traders searching for the next shiny thing.<br><br>The kind of tribe that understands scars are not weakness. Scars are proof you survived the blade.</p>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="sn-row sn-row-left sn-gold">
+        <div class="sn-half-left">
+          <div class="sn-card reveal">
+            <div class="sn-label">CHAPTER VII</div>
+            <div class="sn-title">THE LONGSHIPS SAIL AGAIN</div>
+            <p class="sn-text">Now the longships sail again. Not carried by hype. Not inflated by false kings or artificial noise. But driven by something stronger: A community too stubborn to die.<br><br>The builders still build. The tribe still grows. The serpent still watches from the ice.<br><br>You cannot kill something that has already survived death.<br><br>Three times the world watched Viper fall. Three times Viper stood back up stronger. Because surrender was never part of the story.</p>
+          </div>
+        </div>
+        <div class="sn-center"><div class="sn-dot"></div></div>
+        <div class="sn-half-right"></div>
+      </div>
+
     </div>
   </div>
 
-  <div class="lore-blocks lore-blocks-notop">
-    <span class="tag tag-gold reveal">TOKEN STATS</span>
-    <h2 class="sec-title reveal delay-1">BY THE <span class="gold">NUMBERS</span></h2>
-    <div class="token-grid">
-      <div class="tg-cell reveal"><div class="tg-num">TBD</div><div class="tg-lbl">Total Supply</div></div>
-      <div class="tg-cell reveal delay-1"><div class="tg-num">0%</div><div class="tg-lbl">Tax</div></div>
-      <div class="tg-cell reveal delay-2"><div class="tg-num">ADA</div><div class="tg-lbl">Network</div></div>
-      <div class="tg-cell reveal delay-3"><div class="tg-num">5K+</div><div class="tg-lbl">Holders</div></div>
-      <div class="tg-cell reveal"><div class="tg-num">LP</div><div class="tg-lbl">Locked Liquidity</div></div>
-      <div class="tg-cell reveal delay-1"><div class="tg-num">DEX</div><div class="tg-lbl">Trading Venue</div></div>
+  <div class="law-section">
+    <div class="law-section-hdr reveal">
+      <span class="tag tag-gold">TOKENOMICS</span>
+      <h2 class="sec-title">THE LAW OF<br><span class="gold">THE SERPENT</span></h2>
+      <div class="law-text">
+        <p>Other projects built economies.</p>
+        <p>Viper built endurance.</p>
+        <p>No hidden empires. No illusions of perfection. No fantasy numbers crafted for temporary applause. The treasury stands on-chain like a war chest in the center of camp — visible to all who gather around the fire.</p>
+      </div>
     </div>
+    <div class="law-rules">
+      <div class="law-rule reveal"><div class="law-rule-text">Build honestly.</div><div class="law-rule-num">I</div></div>
+      <div class="law-rule reveal delay-1"><div class="law-rule-text">Survive together.</div><div class="law-rule-num">II</div></div>
+      <div class="law-rule reveal delay-2"><div class="law-rule-text">Never abandon the tribe.</div><div class="law-rule-num">III</div></div>
+      <div class="law-rule reveal delay-3"><div class="law-rule-text">Make every collapse part of the legend.</div><div class="law-rule-num">IV</div></div>
+    </div>
+    <p class="law-closing reveal">In Viper, volatility is not failure. It is initiation. Every crash forged stronger holders. Every setback removed weak conviction. Every betrayal taught the tribe how to build without depending on false leaders.<br><br>That is why Viper still breathes while countless others faded into silence. <em>The serpent lives.</em></p>
   </div>
 
   <footer>
@@ -898,25 +1003,30 @@ footer p{font-size:0.82rem;color:#fff;}
         <div class="tc-av"><img src="Images/Jinx.png" alt="Jinx"></div>
         <div class="tc-name">JINX</div>
         <div class="tc-role">Community Member</div>
-        <a href="https://x.com/_Just_Jinx" target="_blank" rel="noopener noreferrer" class="tc-x">&#x1D54F; @_Just_Jinx</a>
+        <div class="tc-socials">
+          <a href="https://x.com/_Just_Jinx" target="_blank" rel="noopener noreferrer" class="tc-x" aria-label="Jinx on X">&#x1D54F;</a>
+          <a href="https://linktr.ee/Just_Jinx" target="_blank" rel="noopener noreferrer" class="tc-lt" aria-label="Jinx on Linktree">
+            <img src="Images/Linktree_id_-jZiqwW_1.png" alt="Linktree">
+          </a>
+        </div>
       </div>
       <div class="tc tc-green reveal delay-1">
         <div class="tc-av"><img src="Images/Madmusicmaker.png" alt="Madmusicmaker"></div>
         <div class="tc-name">MADMUSICMAKER</div>
         <div class="tc-role">Community Member</div>
-        <a href="https://x.com/AMadMusicMaker" target="_blank" rel="noopener noreferrer" class="tc-x">&#x1D54F; @AMadMusicMaker</a>
+        <a href="https://x.com/AMadMusicMaker" target="_blank" rel="noopener noreferrer" class="tc-x" aria-label="Madmusicmaker on X">&#x1D54F;</a>
       </div>
       <div class="tc tc-cyan reveal delay-2">
         <div class="tc-av"><img src="Images/MikeyExile.png" alt="MikeyExile"></div>
         <div class="tc-name">MIKEYEXILE</div>
         <div class="tc-role">Community Member</div>
-        <a href="https://x.com/Birfmas132355" target="_blank" rel="noopener noreferrer" class="tc-x">&#x1D54F; @Birfmas132355</a>
+        <a href="https://x.com/Birfmas132355" target="_blank" rel="noopener noreferrer" class="tc-x" aria-label="MikeyExile on X">&#x1D54F;</a>
       </div>
       <div class="tc tc-gold reveal delay-3">
         <div class="tc-av"><img src="Images/Snekable.png" alt="Snekable"></div>
         <div class="tc-name">SNEKABLE</div>
         <div class="tc-role">Community Member</div>
-        <a href="https://x.com/snekable" target="_blank" rel="noopener noreferrer" class="tc-x">&#x1D54F; @snekable</a>
+        <a href="https://x.com/snekable" target="_blank" rel="noopener noreferrer" class="tc-x" aria-label="Snekable on X">&#x1D54F;</a>
       </div>
     </div>
   </div>

@@ -14,6 +14,29 @@ Format:
 
 ---
 
+## [2026-05-13] — v5: Lore page snake timeline, tokenomics rewrite, dot fixes, About Us updates
+
+### Added
+- **Snake timeline (Lore page)** — 7-chapter zigzag timeline replaces the old placeholder lore blocks. A coloured gradient spine (red→gold→green→cyan→red) runs down the centre; chapters alternate left/right with coloured dots and connector lines. CSS classes `.snake-timeline`, `.snake-path`, `.sn-row`, `.sn-card`, `.sn-dot`, `.sn-center`, `.sn-half-left`, `.sn-half-right` added. Responsive: collapses to single-column stack at ≤640px.
+- **Snake timeline colour classes** — `.sn-red`, `.sn-gold`, `.sn-green`, `.sn-cyan` CSS classes replace inline `style="--sn-col:..."` attributes on each `.sn-row` (linter compliance).
+- **Lore content** — full creative writing from community PDF ("Viper Refused The Grave") used across all 7 chapters: Dragged From The Storm, The Longships Cross The Candles, And Fire Always Came, Someone Lit Another Torch, Held Together By Conviction, Scars Are Proof You Survived, The Longships Sail Again.
+- **THE LAW OF THE SERPENT (Tokenomics)** — full-width section replaces the old 2-column donut layout. Centred heading + intro text, 4 large rule cards in a 2×2 grid (each with giant watermark Roman numeral), closing paragraph. Classes: `.law-section`, `.law-section-hdr`, `.law-text`, `.law-rules`, `.law-rule`, `.law-rule-num`, `.law-rule-text`, `.law-closing`.
+- **Linktree icon + link (About Us — Jinx card)** — Linktree logo (`Images/Linktree_id_-jZiqwW_1.png`) added beside the X icon for Jinx, linking to `https://linktr.ee/Just_Jinx`. Icon rendered white via `filter: brightness(0) invert(1)`. `.tc-socials`, `.tc-lt` CSS classes added.
+
+### Changed
+- **X handle text removed (About Us team cards)** — all four `.tc-x` links now show only the `𝕏` glyph (no `@username` text). Font size bumped `0.8rem → 1.6rem` for easier tapping. Hover adds `scale(1.15)` lift.
+- **Pie/donut chart removed** — the tokenomics donut SVG and legend column are gone; the full section width is given to the narrative and rule cards.
+- **"More lore and the full story coming soon…" removed** from the Lore page hero.
+- **"BY THE NUMBERS" section removed** from the Lore page.
+
+### Fixed (dot background bleed-through)
+- **`.law-rule`** `background: rgba(255,255,255,0.02) → var(--bg3)` — dots no longer show through the 4 tokenomics rule cards.
+- **`.feat-section`** dot pattern removed (`background-image` and `background-size` stripped) — no dots visible around the 4 FANGS OF CARDANO ecosystem cards on the Home page.
+- **`.val-card`** `background: rgba(255,255,255,0.02) → var(--bg3)` — dots no longer bleed through the 4 values cards (COMMUNITY FIRST, TRANSPARENCY, CULTURE & MEMES, REAL UTILITY) on the About Us page.
+- **`.tc`** `background: rgba(255,255,255,0.02) → var(--bg3)` — dots no longer bleed through the 4 team member cards under Meet the Vipers on the About Us page.
+
+---
+
 ## [2026-05-08] — v4: Meme page tab switcher (MEMES / GIFs / STICKERS)
 
 ### Added
